@@ -1,0 +1,27 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:L-Ward/project3.git",
+  "author": "L-Ward <noreply>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "eslint": "^5.4.0",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "sequelize": "^4.38.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
+  }
+}
