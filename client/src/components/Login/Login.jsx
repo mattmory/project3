@@ -27,18 +27,28 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    API.userLogin(this.state.email, this.state.password)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (this.state.isRegistering) {
+      API.userRegister(this.state.email, this.state.password)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      API.userLogin(this.state.email, this.state.password)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   handleToRegister(event) {
     event.preventDefault();
-    this.setState({isRegistering: true});
+    this.setState({ isRegistering: true });
   }
 
   getButton() {
