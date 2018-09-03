@@ -9,6 +9,7 @@ class Login extends React.Component {
       email: "",
       password: "",
       isRegistering: false,
+      instructionText: "Login to see your favorites."
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -48,14 +49,14 @@ class Login extends React.Component {
 
   handleToRegister(event) {
     event.preventDefault();
-    this.setState({ isRegistering: true });
+    this.setState({ isRegistering: true , instructionText: "Create an account to save your favorites."});
   }
 
   getButton() {
     if (this.state.isRegistering) {
       return (
         <div>
-          <button type="submit" className="btn" id="register" onClick={this.handleSubmit}>
+          <button type="submit" className="button float-right" id="register" onClick={this.handleSubmit}>
             Register
           </button>
         </div>
@@ -63,8 +64,8 @@ class Login extends React.Component {
     } else {
       return (
         <div>
-          <button className="btn" id="toRegister" onClick={this.handleToRegister}>Register</button>
-          <button type="submit" className="btn" id="login" onClick={this.handleSubmit}>
+          <a href="#" class="toRegister" onClick={this.handleToRegister}>Register</a>
+          <button type="submit" className="button float-right" id="login" onClick={this.handleSubmit}>
             Login
           </button>
         </div>
@@ -74,17 +75,19 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <form>
+      <div className="row acctDiv">
+        <form className="col-4">
+          <h1>Welcome!</h1>
+          <h3>{this.state.instructionText}</h3>
           <div className="form-group">
-            <label>email:</label>
-            <input type="text" className="form-control" id="email" value={this.state.email} onChange={this.handleEmailChange}></input>
+            <input type="text" className="form-control" placeholder="Email" id="email" value={this.state.email} onChange={this.handleEmailChange}></input>
           </div>
           <div className="form-group">
-            <label>Password:</label>
-            <input type="password" className="form-control" id="password" value={this.state.password} onChange={this.handlePasswordChange}></input>
+            <input type="password" className="form-control" placeholder="Password" id="password" value={this.state.password} onChange={this.handlePasswordChange}></input>
           </div>
-          {this.getButton()}
+          <div>
+            {this.getButton()}
+          </div>
         </form>
       </div>
     );

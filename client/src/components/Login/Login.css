@@ -1,0 +1,22 @@
+.acctDiv {
+  margin-top: 100px;
+}
+
+.form-control {
+  border-radius: 0;
+  border: 0.5px solid #ededed;
+}
+
+.toRegister {
+  color: #68160e;
+}
+
+.toRegister:hover {
+  color: #68160e;
+  filter: brightness(140%);
+}
+
+.toRegister:active {
+  color: #68160e;
+  filter: brightness(60%);
+}
