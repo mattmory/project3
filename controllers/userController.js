@@ -3,7 +3,7 @@ const db = require("../models");
 module.exports = {
   // Handler for login
   login: function (req, res) {
-    res.json({ "isAuthenticaed": true });
+    res.json({ "isAuthenticated": true });
   },
 
   register: function (req, res) {
@@ -12,7 +12,7 @@ module.exports = {
       password: req.body.password,
     })
       .then(() => {
-        res.json({ "isAuthenticaed": true });
+        res.json({ "isAuthenticated": true });
       });
   }
 

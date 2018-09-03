@@ -13,6 +13,8 @@ class Login extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToRegister = this.handleToRegister.bind(this);
+    this.getButton = this.getButton.bind(this);
   }
 
   handleEmailChange(event) {
@@ -34,6 +36,32 @@ class Login extends React.Component {
       });
   }
 
+  handleToRegister(event) {
+    event.preventDefault();
+    this.setState({isRegistering: true});
+  }
+
+  getButton() {
+    if (this.state.isRegistering) {
+      return (
+        <div>
+          <button type="submit" className="btn" id="register" onClick={this.handleSubmit}>
+            Register
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button className="btn" id="toRegister" onClick={this.handleToRegister}>Register</button>
+          <button type="submit" className="btn" id="login" onClick={this.handleSubmit}>
+            Login
+          </button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -46,10 +74,7 @@ class Login extends React.Component {
             <label>Password:</label>
             <input type="password" className="form-control" id="password" value={this.state.password} onChange={this.handlePasswordChange}></input>
           </div>
-          <button className="btn">Register</button>
-          <button type="submit" className="btn" id="login" onClick={(event) => this.handleSubmit(event, this.state.email, this.state.password)}>
-            Login
-          </button>
+          {this.getButton()}
         </form>
       </div>
     );

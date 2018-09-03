@@ -6,5 +6,12 @@ export default {
       email: email,
       password: password,
     });
+  },
+
+  userRegister: function(email, password) {
+    return axios.post("/api/user/register", {
+      email: email,
+      password:password,
+    });
   }
 };
