@@ -1,5 +1,58 @@
+@font-face {
+  font-family: MerriweatherBold;
+  src: url(../src/assets/Fonts/Merriweather/Merriweather-Bold.ttf);
+}
+@font-face {
+  font-family: ComfortaaLight;
+  src: url(../src/assets/Fonts/Comfortaa/Comfortaa-Light.ttf);
+}
+@font-face {
+  font-family: MerriweatherRegular;
+  src: url(../src/assets/Fonts/Merriweather/Merriweather-Regular.ttf);
+}
+@font-face {
+  font-family: ComfortaaBody;
+  src: url(../src/assets/Fonts/Comfortaa/Comfortaa-Regular.ttf);
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background-color: transparent;
+  font-family: ComfortaaBody;
+  font-size: 14px;
+  color: black;
+}
+
+h1 {
+  font-family: MerriweatherBold;
+  font-size: 24px;
+  color: #68160e;
+}
+
+h2 {
+  font-family: ComfortaaLight;
+  font-size: 18px;
+  color: black;
+}
+
+h3 {
+  font-family: MerriweatherRegular;
+  font-size: 14px;
+  color: #68160e;
+}
+
+.button {
+  height: 40px;
+  padding: 0px 10px;
+  font-family: ComfortaaLight;
+  font-size: 18px;
+  color: white;
+  background-color: #68160e
+}
+
+.button:hover {
+  filter: brightness(120%);
+}
+
+.button:active {
+  filter: brightness(80%);
 }
