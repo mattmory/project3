@@ -18,8 +18,6 @@ module.exports = function (sequelize, DataTypes) {
       timestamps: false
     });
 
-
-
   Drink_contents.associate = function (models) {
     // A drink_content can't be created without a drink/ingredient due to the foreign key constraint
     Drink_contents.belongsTo(models.drinks,
