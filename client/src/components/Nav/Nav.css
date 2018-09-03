@@ -1,0 +1,35 @@
+
+h1 {
+    font-family: MerriweatherBold;
+    font-size: 20px;
+    color: #68160e;
+  }
+  
+  h2 {
+    font-family: ComfortaaLight;
+    font-size: 18px;
+    color: black;
+  }
+  
+  h3 {
+    font-family: MerriweatherRegular;
+    font-size: 14px;
+    color: #68160e;
+  }
+  
+  .button {
+    height: 40px;
+    padding: 0px 10px;
+    font-family: ComfortaaLight;
+    font-size: 18px;
+    color: white;
+    background-color: #68160e
+  }
+  
+  .button:hover {
+    filter: brightness(120%);
+  }
+  
+  .button:active {
+    filter: brightness(80%);
+  }
