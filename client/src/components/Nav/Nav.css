@@ -2,20 +2,19 @@
 h1 {
     font-family: MerriweatherBold;
     font-size: 20px;
-    color: #68160e;
-  }
-  
-  h2 {
-    font-family: ComfortaaLight;
-    font-size: 18px;
-    color: black;
-  }
-  
-  h3 {
+    color: #000; 
+}
+h1 #logo {
+    font-family: MerriweatherBold;
+    font-size: 20px;
+    color: #000;
+}
+
+h1 #logoTwo {
     font-family: MerriweatherRegular;
-    font-size: 14px;
-    color: #68160e;
-  }
+    font-size: 20px;
+    
+}
   
   .button {
     height: 40px;
