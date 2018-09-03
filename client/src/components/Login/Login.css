@@ -9,14 +9,11 @@
 
 .toRegister {
   color: #68160e;
+  cursor: pointer;
 }
 
 .toRegister:hover {
   color: #68160e;
   filter: brightness(140%);
-}
-
-.toRegister:active {
-  color: #68160e;
-  filter: brightness(60%);
+  text-decoration: underline;
 }
