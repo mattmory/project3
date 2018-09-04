@@ -3,10 +3,9 @@ import "./Nav.css";
 
 const Nav = () => (
 
-  <nav className="container navbar navbar-expand-lg ">
+  <nav className="container-fluid navbar navbar-expand-lg ">
     <section className="col-sm-5">
-      <a className="navbar-brand" id="logo" href="/">  </a>
-       
+      <a className="navbar-brand" id="logo" href="/">  </a>      
       <h1 id="logoTwo" > <b>Cocktail</b>Creator </h1>
     </section>
 
