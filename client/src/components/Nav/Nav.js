@@ -1,29 +1,55 @@
-import React from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import "./Nav.css";
+import DrinkIcon from "../DrinkIcon/DrinkIcon";
 
-const Nav = () => (
+class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  <nav className="container-fluid navbar navbar-expand-lg ">
-    <section className="col-sm-5">
-      <a className="navbar-brand" id="logo" href="/">  </a>      
-      <h1 id="logoTwo" > <b>cocktail</b>creator </h1>
-    </section>
+    };
+    this.getLink = this.getLink.bind(this);
+  }
 
-    <section className="col-m-3 navbar center ">
-          <li className="nav-link">
-                        <a href="Ingredients.html " className="active "  role="button " data-toggle="button">ingredients</a></li>
-          <li className="nav-link ">
-                        <a href="Recipes.html "  role="button" data-toggle="button">recipes</a></li>
-      </section>
-      <ul className="navbar-nav mr-auto"></ul>
-      <section className="col-sm-2">
-        Saved Drinks
-      </section>
-  </nav>
+  getLink() {
+    if (this.props.isAuthenticated) {
+      return <Link to="/favorites" className="nav-link">
+        <span className="favorites">
+          <span className="drink-icon-nav mr-1">
+            <DrinkIcon />
+          </span>
+          Saved Drinks
+        </span>
+      </Link>;
+    } else {
+      return (
+        <Link to="/account" className="nav-link nav-link-style">
+          Login
+        </Link>
+      );
+    }
+  }
 
-
-
-  
-);
+  render() {
+    return (
+      <nav className="navbar navbar-expand-lg">
+        <a className="navbar-brand" id="logo" href="/">
+          <h1 id="logoTwo"> <b>cocktail</b>creator</h1>
+        </a>
+        <ul className="navbar-nav mx-auto">
+          <li className="nav-item">
+            <Link className="nav-link nav-link-style" to="/">ingredients</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link nav-link-style" to="/browse">recipes</Link>
+          </li>
+        </ul>
+        {this.getLink()}
+      </nav>
+    );
+  }
+}
 
 export default Nav;

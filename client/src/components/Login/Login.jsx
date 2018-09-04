@@ -18,6 +18,7 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleToRegister = this.handleToRegister.bind(this);
     this.getButton = this.getButton.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleEmailChange(event) {
@@ -36,31 +37,28 @@ class Login extends React.Component {
         .then((res) => {
           console.log(res);
           // Auto login on successful registration
-          API.userLogin(this.state.email, this.state.password)
-            // Redirect to landing page on successful login
-            .then((res) => {
-              console.log(res);
-              this.setState({ toHome: true });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          this.handleLogin();
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
       // User login
-      API.userLogin(this.state.email, this.state.password)
-        // Redirect to landing page on successful login
-        .then((res) => {
-          console.log(res);
-          this.setState({ toHome: true });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.handleLogin();
     }
+  }
+
+  handleLogin() {
+    API.userLogin(this.state.email, this.state.password)
+      // Redirect to landing page on successful login
+      .then((res) => {
+        console.log(this.props.authCB);
+        this.props.authCB(this.state.email, res.data.isAuthenticated);
+        this.setState({ toHome: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   handleToRegister(event) {

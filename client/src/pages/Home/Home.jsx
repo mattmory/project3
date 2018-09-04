@@ -5,7 +5,7 @@ import Typeahead from "../../components/Typeahead";
 class Home extends React.Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Typeahead />
       </div>
     );
