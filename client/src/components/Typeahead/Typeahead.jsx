@@ -1,0 +1,52 @@
+import "react-select/dist/react-select.css";
+import "react-virtualized/styles.css";
+import "react-virtualized-select/styles.css";
+import "./Typeahead.css";
+
+import API from "../../utils/API";
+import React from "react";
+import VirtualizedSelect from "react-virtualized-select";
+
+class Typeahead extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      options: [],
+    };
+
+    this.getIngredients = this.getIngredients.bind(this);
+  }
+
+  componentDidMount() {
+    this.getIngredients();
+  }
+
+  async getIngredients() {
+    const ingredients = await API.getIngredients();
+    this.setState({ options: ingredients });
+  }
+
+  render() {
+    let ingredientOptions = [];
+    if (this.state.options.data) {
+      ingredientOptions = this.state.options.data.map((ingredient) => {
+        let ingObj = {
+          label: ingredient.name,
+          value: ingredient.id
+        };
+        return ingObj;
+      });
+    }
+    return (
+      <VirtualizedSelect
+        multi={true}
+        options={ingredientOptions}
+        onChange={(selectValue) => this.setState({ selectValue })}
+        value={this.state.selectValue}
+      />
+    );
+  }
+}
+
+export default Typeahead;

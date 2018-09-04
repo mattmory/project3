@@ -1,0 +1,35 @@
+.Select-control {
+  border-radius: 0;
+  border: 0.5px solid #ededed;
+}
+
+.Select--multi .Select-value {
+  background-color: #e2dec9;
+  border: 0;
+  color: black;
+  height: 25px;
+  border-radius: 0;
+}
+
+.Select--multi .Select-value-icon {
+  color: white;
+  border-right: 0px;
+  font-size: 18px;
+  padding: 0px 0px 0px 6px;
+} 
+.Select--multi .Select-value-icon:hover {
+  color: #68160e;
+  background-color: #e2dec9;
+}
+
+.Select--multi .Select-value-label {
+  padding-right: 6px;
+}
+
+.Select-menu-outer {
+  background-color: #ededed;
+}
+
+.ReactVirtualized__Table__sortableHeaderIcon .Select-option.is-focused  {
+  fill: white !important;
+}

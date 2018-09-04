@@ -64,7 +64,7 @@ class Login extends React.Component {
     } else {
       return (
         <div>
-          <a href="#" class="toRegister" onClick={this.handleToRegister}>Register</a>
+          <span className="toRegister" onClick={this.handleToRegister}>Register</span>
           <button type="submit" className="button float-right" id="login" onClick={this.handleSubmit}>
             Login
           </button>
