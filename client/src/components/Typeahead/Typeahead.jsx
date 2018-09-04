@@ -1,12 +1,11 @@
 import "react-select/dist/react-select.css";
 import "react-virtualized/styles.css";
 import "react-virtualized-select/styles.css";
+import "./Typeahead.css";
 
+import API from "../../utils/API";
 import React from "react";
 import VirtualizedSelect from "react-virtualized-select";
-
-import "./Typeahead.css";
-import API from "../../utils/API";
 
 class Typeahead extends React.Component {
   constructor(props) {
@@ -17,7 +16,6 @@ class Typeahead extends React.Component {
     };
 
     this.getIngredients = this.getIngredients.bind(this);
-
   }
 
   componentDidMount() {
@@ -49,7 +47,6 @@ class Typeahead extends React.Component {
       />
     );
   }
-
 }
 
 export default Typeahead;
