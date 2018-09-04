@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import "./Login.css";
 import API from "../../utils/API";
 
@@ -9,7 +10,8 @@ class Login extends React.Component {
       email: "",
       password: "",
       isRegistering: false,
-      instructionText: "Login to see your favorites."
+      instructionText: "Login to see your favorites.",
+      toHome: false,
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -29,17 +31,31 @@ class Login extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.isRegistering) {
+      // New user registration
       API.userRegister(this.state.email, this.state.password)
         .then((res) => {
           console.log(res);
+          // Auto login on successful registration
+          API.userLogin(this.state.email, this.state.password)
+            // Redirect to landing page on successful login
+            .then((res) => {
+              console.log(res);
+              this.setState({ toHome: true });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
+      // User login
       API.userLogin(this.state.email, this.state.password)
+        // Redirect to landing page on successful login
         .then((res) => {
           console.log(res);
+          this.setState({ toHome: true });
         })
         .catch((err) => {
           console.log(err);
@@ -49,7 +65,7 @@ class Login extends React.Component {
 
   handleToRegister(event) {
     event.preventDefault();
-    this.setState({ isRegistering: true , instructionText: "Create an account to save your favorites."});
+    this.setState({ isRegistering: true, instructionText: "Create an account to save your favorites." });
   }
 
   getButton() {
@@ -74,6 +90,9 @@ class Login extends React.Component {
   }
 
   render() {
+    if (this.state.toHome) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="row acctDiv">
         <form className="col-4">
