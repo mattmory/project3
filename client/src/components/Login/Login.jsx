@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import "./Login.css";
 import API from "../../utils/API";
 
@@ -9,13 +10,15 @@ class Login extends React.Component {
       email: "",
       password: "",
       isRegistering: false,
-      instructionText: "Login to see your favorites."
+      instructionText: "Login to see your favorites.",
+      toHome: false,
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleToRegister = this.handleToRegister.bind(this);
     this.getButton = this.getButton.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleEmailChange(event) {
@@ -29,27 +32,38 @@ class Login extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.isRegistering) {
+      // New user registration
       API.userRegister(this.state.email, this.state.password)
         .then((res) => {
           console.log(res);
+          // Auto login on successful registration
+          this.handleLogin();
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
-      API.userLogin(this.state.email, this.state.password)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // User login
+      this.handleLogin();
     }
+  }
+
+  handleLogin() {
+    API.userLogin(this.state.email, this.state.password)
+      // Redirect to landing page on successful login
+      .then((res) => {
+        console.log(this.props.authCB);
+        this.props.authCB(this.state.email, res.data.isAuthenticated);
+        this.setState({ toHome: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   handleToRegister(event) {
     event.preventDefault();
-    this.setState({ isRegistering: true , instructionText: "Create an account to save your favorites."});
+    this.setState({ isRegistering: true, instructionText: "Create an account to save your favorites." });
   }
 
   getButton() {
@@ -74,6 +88,9 @@ class Login extends React.Component {
   }
 
   render() {
+    if (this.state.toHome) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="row acctDiv">
         <form className="col-4">

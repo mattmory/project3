@@ -1,10 +1,11 @@
-.navbar-brand{
-
+.navbar {
+  height: 50px;
 }
 
 h1 {
     color: black;
 }
+
 h1#logo {
     font-family: MerriweatherBold;
     font-size: 24px;
@@ -15,31 +16,34 @@ h1#logo {
 h1#logoTwo {
     font-family: Merriweather;
     font-size: 24px;
-   margin-bottom: 10px;
 }
   
-  .button {
-    height: 40px;
-    padding: 0px 10px;
-    font-family: ComfortaaLight;
-    font-size: 18px;
-    color: white;
-    background-color: #68160e
-  }
-  
-  .button:hover {
-    filter: brightness(120%);
-  }
-  
-  .button:active {
-    filter: brightness(80%);
-  }
-  
-a {
+a.nav-link-style {
     color: black;
 }
 
+a.nav-link-style:hover {
+  color: #68160e;
+  filter: brightness(140%);
+}
+
 .navbar {
-    background-color: white;
-    
+    background-color: white; 
+}
+
+.favorites {
+  color: black;
+}
+
+.favorites:hover {
+  color: #68160e;
+  fill: #68160e;
+  filter: brightness(140%);
+}
+
+.drink-icon-nav {
+  margin-top: 15px;
+  height: 100%;
+  position: relative;
+  top: 2px;
 }

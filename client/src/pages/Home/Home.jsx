@@ -1,13 +1,12 @@
 import React from "react";
 import "./Home.css";
-import Login from "../../components/Login";
-import Nav from "../../components/Nav";
+import Typeahead from "../../components/Typeahead";
+
 class Home extends React.Component {
   render() {
     return (
-      <div>
-        <Nav />
-        <Login />
+      <div className="container">
+        <Typeahead />
       </div>
     );
   }

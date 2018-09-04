@@ -2,14 +2,37 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
+import Account from "./pages/Account";
+import Nav from "./components/Nav";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      isAuthenticated: false,
+    };
+    this.authCB = this.authCB.bind(this);
+  }
+
+  authCB(email, isAuthenticated) {
+    this.setState({
+      email:email,
+      isAuthenticated:isAuthenticated,
+    });
+  }
+
   render() {
     return (
       <Router>
-        <div className="container-fluid">
+        <div>
+          <Nav email={this.state.email} isAuthenticated={this.state.isAuthenticated} />
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route
+              exact path="/account"
+              render={props => <Account authCB={this.authCB} />}
+            />
           </Switch>
         </div>
       </Router>
