@@ -13,5 +13,9 @@ export default {
       email: email,
       password:password,
     });
+  },
+
+  getIngredients: function() {
+    return axios.get("/api/ingredient");
   }
 };
