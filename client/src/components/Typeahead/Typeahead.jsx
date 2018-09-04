@@ -16,6 +16,7 @@ class Typeahead extends React.Component {
     };
 
     this.getIngredients = this.getIngredients.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +26,13 @@ class Typeahead extends React.Component {
   async getIngredients() {
     const ingredients = await API.getIngredients();
     this.setState({ options: ingredients });
+  }
+
+  // Passing select value to parent Welcome component
+  // then setting state
+  handleOnChange (selectValue) {
+    this.props.ingredientCB(selectValue);
+    this.setState({ selectValue });
   }
 
   render() {
@@ -42,7 +50,7 @@ class Typeahead extends React.Component {
       <VirtualizedSelect
         multi={true}
         options={ingredientOptions}
-        onChange={(selectValue) => this.setState({ selectValue })}
+        onChange={(selectValue) => this.handleOnChange(selectValue)}
         value={this.state.selectValue}
       />
     );

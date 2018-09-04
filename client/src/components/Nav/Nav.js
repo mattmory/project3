@@ -35,9 +35,9 @@ class Nav extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg">
-        <a className="navbar-brand" id="logo" href="/">
+        <Link className="navbar-brand" id="logo" to="/">
           <h1 id="logoTwo"> <b>cocktail</b>creator</h1>
-        </a>
+        </Link>
         <ul className="navbar-nav mx-auto">
           <li className="nav-item">
             <Link className="nav-link nav-link-style" to="/">ingredients</Link>

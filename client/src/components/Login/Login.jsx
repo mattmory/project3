@@ -93,7 +93,7 @@ class Login extends React.Component {
     }
     return (
       <div className="row acctDiv">
-        <form className="col-4">
+        <form className="col-6">
           <h1>Welcome!</h1>
           <h3>{this.state.instructionText}</h3>
           <div className="form-group">
