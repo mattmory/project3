@@ -1,12 +1,12 @@
 import React from "react";
 import "./Home.css";
-import Typeahead from "../../components/Typeahead";
+import Welcome from "../../components/Welcome";
 
 class Home extends React.Component {
   render() {
     return (
-      <div className="container">
-        <Typeahead />
+      <div className="container-fluid">
+        <Welcome />
       </div>
     );
   }

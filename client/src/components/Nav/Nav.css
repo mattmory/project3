@@ -2,20 +2,17 @@
   height: 50px;
 }
 
-h1 {
-    color: black;
-}
-
 h1#logo {
     font-family: MerriweatherBold;
     font-size: 24px;
-    color: #000;
+    color: black;
     
 }
 
 h1#logoTwo {
     font-family: Merriweather;
     font-size: 24px;
+    color: black;
 }
   
 a.nav-link-style {
