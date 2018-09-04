@@ -6,7 +6,7 @@ const Nav = () => (
   <nav className="container-fluid navbar navbar-expand-lg ">
     <section className="col-sm-5">
       <a className="navbar-brand" id="logo" href="/">  </a>      
-      <h1 id="logoTwo" > <b>Cocktail</b>Creator </h1>
+      <h1 id="logoTwo" > <b>cocktail</b>creator </h1>
     </section>
 
     <section className="col-m-3 navbar center ">
