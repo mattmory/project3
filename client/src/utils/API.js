@@ -21,7 +21,7 @@ export default {
   getAllDrinks: function () {
     return axios.get("/api/drink");
   },
-  
+
   getDrinkById: function (drinkId) {
     return axios.get("/api/drink/" + drinkId);
   },

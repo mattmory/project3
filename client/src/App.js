@@ -15,10 +15,11 @@ class App extends Component {
     this.authCB = this.authCB.bind(this);
   }
 
-  authCB(email, isAuthenticated) {
+  authCB(email, isAuthenticated, id) {
     this.setState({
       email:email,
       isAuthenticated:isAuthenticated,
+      id: id,
     });
   }
 
