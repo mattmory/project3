@@ -78,6 +78,10 @@ export default {
       user_id: userId,
       drink_id: drinkId
     });
+  },
+
+  getIngredients: function() {
+    return axios.get("/api/ingredient");
   }
 
 };

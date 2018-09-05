@@ -3,7 +3,10 @@ const db = require("../models");
 module.exports = {
   // Handler for login
   login: function (req, res) {
-    res.json({ "isAuthenticated": true });
+    res.json({
+      email: req.body.email,
+      isAuthenticated: true,
+    });
   },
 
   register: function (req, res) {
@@ -12,8 +15,10 @@ module.exports = {
       password: req.body.password,
     })
       .then(() => {
-        res.json({ "isAuthenticated": true });
+        res.json({ message: "Account creation successful."});
+      })
+      .catch(() => {
+        res.json({ message: "Account creation failed."});
       });
   }
-
 };

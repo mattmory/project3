@@ -1,0 +1,46 @@
+.navbar {
+  height: 50px;
+}
+
+h1#logo {
+    font-family: MerriweatherBold;
+    font-size: 24px;
+    color: black;
+    
+}
+
+h1#logoTwo {
+    font-family: Merriweather;
+    font-size: 24px;
+    color: black;
+}
+  
+a.nav-link-style {
+    color: black;
+}
+
+a.nav-link-style:hover {
+  color: #68160e;
+  filter: brightness(140%);
+}
+
+.navbar {
+    background-color: white; 
+}
+
+.favorites {
+  color: black;
+}
+
+.favorites:hover {
+  color: #68160e;
+  fill: #68160e;
+  filter: brightness(140%);
+}
+
+.drink-icon-nav {
+  margin-top: 15px;
+  height: 100%;
+  position: relative;
+  top: 2px;
+}
