@@ -87,7 +87,8 @@ module.exports = {
 
     /* build SQL String */
     let queryString = "SELECT distinct " +
-      "drinks.id as drinkID, drinks.name, drinks.thumb_img_url " +
+      "drinks.id as drinkID, drinks.name, drinks.thumb_img_url, " +
+      "(select count(*) from favorites where drinkID = drink_id group by drink_id ) as favCount " +
       "FROM drinks AS drinks INNER JOIN drink_contents AS drink_contents ON drinks.id = drink_contents.drink_id " +
       " AND " + searchStringOr + ";";
 
@@ -102,7 +103,8 @@ module.exports = {
           finalJSON[dD] = {
             id: dbDrink.drinkID,
             name: dbDrink.name,
-            imgUrl: dbDrinks.thumb_img_url,
+            imgUrl: dbDrink.thumb_img_url,
+            favedCnt: dbDrink.favCount === null ? 0: dbDrink.favCount,
             missingIngCount: 0,
             missingIng: []
           }

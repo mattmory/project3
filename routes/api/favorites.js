@@ -5,7 +5,7 @@ const favoritesController = require("../../controllers/favoritesController");
 router.route("/")
   .get(favoritesController.findAll)
 router.route("/:userId")
-  .get(favoritesController.findById)
+  .get(favoritesController.findByUserId)
 router.route("/")
   .post(favoritesController.addFavorite)
 router.route("/")

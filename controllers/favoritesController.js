@@ -4,15 +4,18 @@ module.exports = {
   // Handler for /api/favorites, Get
   // Returns all favorites
   findAll: function (req, res) {
-    db.Favorites.findAll()
+    db.sequelize.query("select count(*) as favCount, drink_id from favorites group by drink_id order by favCount desc;")
       .then(function (dbFavorites) {
-        res.json(dbFavorites);
-      });
+        res.json(dbFavorites[0]);
+      })
+      .catch(function (error){
+        console.log(error)
+      })
   },
 
   // Handler for /api/favorites/:userId, Get
   // Returns favorites for the user specified by the userId
-  findById: function (req, res) {
+  findByUserId: function (req, res) {
     db.Favorites.findAll({
       where: {
         user_id: [req.params.userId]
