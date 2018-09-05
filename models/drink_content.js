@@ -12,6 +12,11 @@ module.exports = function (sequelize, DataTypes) {
       amount: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+      required: {
+        type: DataTypes.BOOLEAN,
+        default: true,
+        allowNull: true,
       }
     },
     {
