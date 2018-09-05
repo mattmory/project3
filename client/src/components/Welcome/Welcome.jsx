@@ -1,5 +1,6 @@
 import React from "react";
 import "./Welcome.css";
+import API from "../../utils/API";
 import Typeahead from "../Typeahead";
 
 class Welcome extends React.Component {
@@ -14,14 +15,25 @@ class Welcome extends React.Component {
 
   // Callback to get ingredients from typeahead and store in state
   ingredientCB(selectValue) {
-    this.setState({ingredients: selectValue});
+    this.setState({ ingredients: selectValue });
   }
 
   // Search drinks
   handleSearch(event) {
     event.preventDefault();
-    console.log(this.state.ingredients);
+    const ingId = this.state.ingredients.map((ing) => {
+      return ing.value;
+    });
+    console.log(ingId);
     // TODO: make api call
+    API.getDrinksByIngs(ingId)
+      .then((res) => {
+        if (res) {
+          console.log(res);
+        } else {
+          console.log("no results found");
+        }
+      });
   }
 
   render() {
@@ -31,7 +43,7 @@ class Welcome extends React.Component {
           <h1>Welcome! Let's get started.</h1>
           <h3>Find recipes by letting us know which ingredients you have on hand.</h3>
           <div className="welcome-typeahead">
-            <Typeahead ingredientCB={this.ingredientCB}/>
+            <Typeahead ingredientCB={this.ingredientCB} />
           </div>
           <button type="button" className="button float-right" onClick={this.handleSearch}>
             Search Recipes

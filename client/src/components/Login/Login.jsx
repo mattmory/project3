@@ -53,7 +53,7 @@ class Login extends React.Component {
       // Redirect to landing page on successful login
       .then((res) => {
         console.log(this.props.authCB);
-        this.props.authCB(this.state.email, res.data.isAuthenticated);
+        this.props.authCB(this.state.email, res.data.isAuthenticated, res.data.id);
         this.setState({ toHome: true });
       })
       .catch((err) => {

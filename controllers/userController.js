@@ -6,6 +6,7 @@ module.exports = {
     res.json({
       email: req.body.email,
       isAuthenticated: true,
+      id: req.body.id,
     });
   },
 
