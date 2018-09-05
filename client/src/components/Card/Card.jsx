@@ -1,6 +1,7 @@
 import React from "react";
 import "./Style.css";
 import { Container, Row, Col } from "../Grid";
+import API from "../../utils/API";
 
 class Card extends React.Component {
   constructor(props) {
@@ -10,16 +11,19 @@ class Card extends React.Component {
     return (
       <div className="card" onClick={() => props.setClicked(props.id)}>
         <div className="img-container">
+        
           <img alt={props.name} src={props.image} />
         </div>
         <div className="content">
           {props.name}
           {props.ingredients}
+          {props.summary}
         </div>
       </div>
     );
   }
 }
+
 
 export default Card;
 
