@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
+import Favorites from "./pages/Favorites";
 import Nav from "./components/Nav";
 
 class App extends Component {
@@ -11,14 +12,15 @@ class App extends Component {
     this.state = {
       email: "",
       isAuthenticated: false,
+      id: ""
     };
     this.authCB = this.authCB.bind(this);
   }
 
   authCB(email, isAuthenticated, id) {
     this.setState({
-      email:email,
-      isAuthenticated:isAuthenticated,
+      email: email,
+      isAuthenticated: isAuthenticated,
       id: id,
     });
   }
@@ -27,12 +29,16 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav email={this.state.email} isAuthenticated={this.state.isAuthenticated} />
+          <Nav email={this.state.email} isAuthenticated={this.state.isAuthenticated} id={this.state.id} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route
               exact path="/account"
               render={props => <Account authCB={this.authCB} />}
+            />
+            <Route
+              exact path="/favorites"
+              render={props => <Favorites authCB={this.authCB} />}
             />
           </Switch>
         </div>
