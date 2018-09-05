@@ -1,8 +1,16 @@
 const router = require("express").Router();
 const drinkController = require("../../controllers/drinkController");
 
-// Routes --more routes inc
+
 router.route("/")
-  .get(drinkController.findAll);
+  .get(drinkController.findAll)
+router.route("/:drinkId")
+  .get(drinkController.findById)
+router.route("/ing/:ingId")
+  .get(drinkController.findByIng)
+router.route("/")
+  .post(drinkController.addDrink)
 
 module.exports = router;
+
+
