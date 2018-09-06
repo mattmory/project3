@@ -36,9 +36,9 @@ module.exports = {
         var i = 0;
         dbDrink.forEach(function (drinkIngredient) {
           ingredientsJSON[i] = {
-            ingredentID: drinkIngredient.iId,
-            ingredentName: drinkIngredient.iName,
-            ingredentAmount: drinkIngredient.amount
+            ingredientID: drinkIngredient.iId,
+            ingredientName: drinkIngredient.iName,
+            ingredientAmount: drinkIngredient.amount
           }
           i++;
         });

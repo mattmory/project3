@@ -36,7 +36,7 @@ class Card extends React.Component {
               {this.state.drinkData.drinkName}
               {this.state.drinkData.instructions}
               {this.state.drinkData.contents.map(Ing => (
-                <span>{Ing.ingredentName}:{Ing.ingredentAmount}</span>
+                <span>{Ing.ingredientName}:{Ing.ingredientAmount}</span>
               ))}
             </div>
           </div>
