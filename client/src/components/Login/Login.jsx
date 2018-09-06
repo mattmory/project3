@@ -52,7 +52,7 @@ class Login extends React.Component {
     API.userLogin(this.state.email, this.state.password)
       // Redirect to landing page on successful login
       .then((res) => {
-        console.log(this.props.authCB);
+        console.log(res);
         this.props.authCB(this.state.email, res.data.isAuthenticated, res.data.id);
         this.setState({ toHome: true });
       })
@@ -93,7 +93,7 @@ class Login extends React.Component {
     }
     return (
       <div className="row acctDiv">
-        <form className="col-6">
+        <form className="col-xs-12 col-md-5 pl-5">
           <h1>Welcome!</h1>
           <h3>{this.state.instructionText}</h3>
           <div className="form-group">

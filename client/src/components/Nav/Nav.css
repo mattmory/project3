@@ -1,5 +1,6 @@
 .navbar {
   height: 50px;
+  border-bottom: 0.5px solid #ededed;
 }
 
 h1#logo {
@@ -15,8 +16,12 @@ h1#logoTwo {
     color: black;
 }
   
-a.nav-link-style {
+.navbar-light .navbar-nav .nav-link {
     color: black;
+}
+
+a.nav-link-style {
+  color: black;
 }
 
 a.nav-link-style:hover {
@@ -24,8 +29,9 @@ a.nav-link-style:hover {
   filter: brightness(140%);
 }
 
-.navbar {
-    background-color: white; 
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #68160e;
+  filter: brightness(140%);
 }
 
 .favorites {
@@ -43,4 +49,8 @@ a.nav-link-style:hover {
   height: 100%;
   position: relative;
   top: 2px;
+}
+
+.bg-light {
+  background-color: white;
 }

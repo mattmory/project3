@@ -34,7 +34,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" id="logo" to="/">
           <h1 id="logoTwo"> <b>cocktail</b>creator</h1>
         </Link>
