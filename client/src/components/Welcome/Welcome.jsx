@@ -66,7 +66,7 @@ class Welcome extends React.Component {
           <h1>Welcome! Let's get started.</h1>
           <h3>Find recipes by letting us know which ingredients you have on hand.</h3>
           <div className="welcome-typeahead">
-            <Typeahead ingredientCB={this.ingredientCB} />
+            <Typeahead ingredientCB={this.ingredientCB} ingredients={this.state.ingredients}/>
           </div>
           <button type="button" className="button float-right" onClick={this.handleSearch}>
             Search Recipes
