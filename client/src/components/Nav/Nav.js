@@ -50,7 +50,7 @@ class Navigation extends Component {
   render() {
     return (
       <Navbar color="light" light expand="md">
-        <NavbarBrand className="logo"><b>cocktail</b>creator</NavbarBrand>
+        <NavbarBrand><span className="logo"><b>cocktail</b>creator</span></NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mx-auto" navbar>

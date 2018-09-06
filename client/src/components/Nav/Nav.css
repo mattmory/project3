@@ -4,17 +4,10 @@
   z-index: 2;
 }
 
-h1#logo {
-    font-family: MerriweatherBold;
-    font-size: 24px;
-    color: black;
-    
-}
-
-h1#logoTwo {
+.logo {
     font-family: Merriweather;
     font-size: 24px;
-    color: black;
+    color: black;   
 }
   
 .navbar-light .navbar-nav .nav-link {
