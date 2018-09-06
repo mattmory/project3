@@ -3,7 +3,6 @@ const db = require("../models");
 module.exports = {
   // Handler for login
   login: function (req, res) {
-    console.log(res);
     res.json({
       email: req.body.email,
       isAuthenticated: true,

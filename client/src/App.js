@@ -39,9 +39,11 @@ class App extends Component {
             />
             <Route
               exact path="/favorites"
-              render={props => <Favorites authCB={this.authCB} />}
+              render={props => <Favorites
+                userId={this.state.id} isAuthenticated={this.state.isAuthenticated} />}
             />
-            <Route exact path="/results" component={Results} />
+            <Route exact path="/results" component={Results}/>
+            <Route component={Home} />
           </Switch>
         </div>
       </Router>
