@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Favorites from "./pages/Favorites";
+import Results from "./pages/Results";
 import Nav from "./components/Nav";
 
 class App extends Component {
@@ -40,6 +41,7 @@ class App extends Component {
               exact path="/favorites"
               render={props => <Favorites authCB={this.authCB} />}
             />
+            <Route exact path="/results" component={Results} />
           </Switch>
         </div>
       </Router>

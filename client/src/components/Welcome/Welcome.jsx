@@ -62,7 +62,7 @@ class Welcome extends React.Component {
   render() {
     return (
       <div className="row typeaheadDiv">
-        <div className="col-6">
+        <div className="col-xs-12 col-md-5 pl-5">
           <h1>Welcome! Let's get started.</h1>
           <h3>Find recipes by letting us know which ingredients you have on hand.</h3>
           <div className="welcome-typeahead">
