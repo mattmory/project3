@@ -1,16 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  DropdownItem
+} from 'reactstrap';
 import "./Nav.css";
 import DrinkIcon from "../DrinkIcon/DrinkIcon";
 
-class Nav extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isOpen: false
     };
     this.getLink = this.getLink.bind(this);
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   }
 
   getLink() {
@@ -34,22 +49,24 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="navbar-brand" id="logo" to="/">
-          <h1 id="logoTwo"> <b>cocktail</b>creator</h1>
-        </Link>
-        <ul className="navbar-nav mx-auto">
-          <li className="nav-item">
-            <Link className="nav-link nav-link-style" to="/">ingredients</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link nav-link-style" to="/browse">recipes</Link>
-          </li>
-        </ul>
-        {this.getLink()}
-      </nav>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand className="logo"><b>cocktail</b>creator</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="mx-auto" navbar>
+            <NavItem>
+              <Link className="nav-link nav-link-style" to="/">ingredients</Link>
+            </NavItem>
+            <NavItem>
+              <Link className="nav-link nav-link-style" to="/browse">recipes</Link>
+            </NavItem>
+          </Nav>
+          <DropdownItem divider />
+          {this.getLink()}
+        </Collapse>
+      </Navbar>
     );
   }
 }
 
-export default Nav;
+export default Navigation;

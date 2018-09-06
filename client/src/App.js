@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Favorites from "./pages/Favorites";
 import Results from "./pages/Results";
-import Nav from "./components/Nav";
+import Navigation from "./components/Nav";
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav email={this.state.email} isAuthenticated={this.state.isAuthenticated} id={this.state.id} />
+          <Navigation email={this.state.email} isAuthenticated={this.state.isAuthenticated} id={this.state.id} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route

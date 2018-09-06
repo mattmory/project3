@@ -1,6 +1,7 @@
 .navbar {
   height: 50px;
   border-bottom: 0.5px solid #ededed;
+  z-index: 2;
 }
 
 h1#logo {
@@ -48,9 +49,10 @@ a.nav-link-style:hover {
   margin-top: 15px;
   height: 100%;
   position: relative;
-  top: 2px;
+  top: -2px;
 }
 
-.bg-light {
-  background-color: white;
+.collapse.show {
+  background-color: #f8f9fa;
+  z-index: 1;
 }
