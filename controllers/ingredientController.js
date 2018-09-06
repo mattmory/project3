@@ -4,7 +4,7 @@ module.exports = {
   // Handler for /api/ingredient/, Get
   // Returns all Ingredeients
   findAll: function (req, res) {
-    db.ingredients.findAll()
+    db.ingredients.findAll({order: ["name"]})
       .then(function (dbIngredients) {
         res.json(dbIngredients);
       });

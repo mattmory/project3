@@ -35,7 +35,6 @@ class Login extends React.Component {
       // New user registration
       API.userRegister(this.state.email, this.state.password)
         .then((res) => {
-          console.log(res);
           // Auto login on successful registration
           this.handleLogin();
         })
@@ -52,7 +51,6 @@ class Login extends React.Component {
     API.userLogin(this.state.email, this.state.password)
       // Redirect to landing page on successful login
       .then((res) => {
-        console.log(res);
         this.props.authCB(this.state.email, res.data.isAuthenticated, res.data.id);
         this.setState({ toHome: true });
       })
