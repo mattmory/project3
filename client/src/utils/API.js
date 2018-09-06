@@ -27,7 +27,7 @@ export default {
   },
 
   getDrinksByIngs: function (ingIds) {
-    return axios.get("/api/drink/" + ingIds);
+    return axios.get("/api/drink/ing/" + ingIds);
   },
 
   addDrink: function (name, glass, thumb_url, instructions, description, contentsJSON) {
