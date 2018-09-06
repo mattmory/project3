@@ -29,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div id="routerDiv">
           <Navigation email={this.state.email} isAuthenticated={this.state.isAuthenticated} id={this.state.id} />
           <Switch>
             <Route exact path="/" component={Home} />

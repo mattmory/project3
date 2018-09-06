@@ -5,7 +5,7 @@ import Welcome from "../../components/Welcome";
 class Home extends React.Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid backgroundDiv">
         <Welcome />
       </div>
     );
