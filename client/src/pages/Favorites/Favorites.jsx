@@ -4,6 +4,9 @@ import "./Favorites.css";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 
+import Card from "../../components/Card/";
+import { Row, Col, Container } from "../../components/Grid"
+
 
 class Favorites extends React.Component {
 
@@ -34,20 +37,19 @@ class Favorites extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="container-fluid">
-        <div><span>Favorites Page</span></div>
+      <Container>
         {this.state.userFaves.length ? (
-          <ul>
+          <Row>
             {this.state.userFaves.map(Fav => (
-              <li key={Fav.drink_id}>
-                {Fav.drink_id}
-              </li>
+              <Card key={Fav.drink_id}
+                drinkId={Fav.drink_id}
+              />
             ))}
-          </ul>
+          </Row>
         ) : (
             <span>You have no favorites.. get drinking!</span>
           )}
-      </div>
+      </Container>
     );
   }
 }

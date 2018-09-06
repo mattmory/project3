@@ -3,22 +3,45 @@ import "./Style.css";
 import { Container, Row, Col } from "../Grid";
 import API from "../../utils/API";
 
+
 class Card extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      drinkData: null
+    };
   }
+
+  componentDidMount() {
+    this.loadDrink();
+  }
+
+  loadDrink = () => {
+    API.getDrinkById(this.props.drinkId)
+      .then(res => {
+        this.setState({ drinkData: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
-      <div className="card" onClick={() => props.setClicked(props.id)}>
-        <div className="img-container">
-        
-          <img alt={props.name} src={props.image} />
-        </div>
-        <div className="content">
-          {props.name}
-          {props.ingredients}
-          {props.summary}
-        </div>
+      <div>
+        {this.state.drinkData !== null ? (
+          <div className="card">
+            <div className="img-container">
+              <img alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
+            </div>
+            <div className="content">
+              {this.state.drinkData.drinkName}
+              {this.state.drinkData.instructions}
+              {this.state.drinkData.contents.map(Ing => (
+                <span>{Ing.ingredentName}:{Ing.ingredentAmount}</span>
+              ))}
+            </div>
+          </div>
+        ) :
+          (<span></span>)}
       </div>
     );
   }
@@ -27,21 +50,8 @@ class Card extends React.Component {
 
 export default Card;
 
-// export const RecipeListItem = props => (
-//     <li className="list-group-item">
-//       <Container>
-//         <Row>
-//           <Col size="xs-4 sm-2">
-//             <Thumbnail src={props.thumbnail || "https://placehold.it/300x300"} />
-//           </Col>
-//           <Col size="xs-8 sm-9">
-//             <h3>{props.title}</h3>
-//             <p>Ingredients: {props.ingredients}</p>
-//             <a rel="noreferrer noopener" target="_blank" href={props.href}>
-//               Go to recipe!
-//             </a>
-//           </Col>
-//         </Row>
-//       </Container>
-//     </li>
-//   );
+
+
+
+
+// onClick={() => this.props.setClicked(this.props.drink_id
