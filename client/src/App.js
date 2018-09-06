@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Favorites from "./pages/Favorites";
+import Results from "./pages/Results";
 import Nav from "./components/Nav";
 
 class App extends Component {
