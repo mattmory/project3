@@ -30,11 +30,10 @@ module.exports = {
   // Adds a favorite specified by the drink_id and user_id of the body
   addFavorite: function (req, res) {
     //Check to see if the favorite combo exists
-    console.log(req.body)
     db.Favorites.findOne({
       where: { user_id: req.body.user_id, drink_id: req.body.drink_id },
     }).then(function (dbFavorite) {
-      if (dbFavorite != null) {
+      if (dbFavorite !== null) {
         res.status(200).send("Favorite exists for user.");
       }
       else {

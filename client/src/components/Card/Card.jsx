@@ -24,6 +24,21 @@ class Card extends React.Component {
       .catch(err => console.log(err));
   };
 
+  updateFavorite = () => {
+    // Check to see if the user is authed.. if no, do nothing.
+    if (this.props.isAuthenticated) {
+      // Check to see if the action was from the favorite page, if so, delete the fav.
+      if (this.props.fromFaves) {
+        API.deleteFavorite(this.props.userId, this.state.drinkData.drinkID);
+        this.setState({drinkData: null});
+      }
+      // If the action no from favorites, add a favorite
+      else {
+        API.addFavorite(this.props.userId, this.state.drinkData.drinkID);
+      }
+    }
+  };
+
   render() {
     return (
       this.state.drinkData !== null ? (
@@ -32,7 +47,7 @@ class Card extends React.Component {
             <img className="card-image-top rounded-top" alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
             <div className="card-body">
               <h1 className="drinkName">{this.state.drinkData.drinkName}
-                <span className="drink-icon-card float-right">
+                <span className="drink-icon-card float-right" onClick={() => this.updateFavorite(this.props.drinkId)}>
                   <DrinkIcon />
                 </span>
               </h1>
@@ -52,5 +67,3 @@ class Card extends React.Component {
 }
 
 export default Card;
-
-// onClick={() => this.props.setClicked(this.props.drink_id

@@ -38,7 +38,8 @@ export default {
         thumb_url: thumb_url,
         instructions: instructions,
         description: description,
-        contents: contentsJSON});
+        contents: contentsJSON
+      });
   },
 
   // Ingredient API Calls
@@ -75,12 +76,14 @@ export default {
 
   deleteFavorite: function (userId, drinkId) {
     return axios.delete("/api/favorites", {
-      user_id: userId,
-      drink_id: drinkId
+      data: {
+        user_id: userId,
+        drink_id: drinkId
+      }
     });
   },
 
-  getIngredients: function() {
+  getIngredients: function () {
     return axios.get("/api/ingredient");
   }
 
