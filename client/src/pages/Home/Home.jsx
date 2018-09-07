@@ -2,14 +2,10 @@ import React from "react";
 import "./Home.css";
 import Welcome from "../../components/Welcome";
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div className="container-fluid backgroundDiv">
-        <Welcome />
-      </div>
-    );
-  }
-}
+const Home = (props) => (
+  <div className="container-fluid backgroundDiv">
+    <Welcome {...props} />
+  </div>
+);
 
 export default Home;

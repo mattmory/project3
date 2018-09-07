@@ -41,12 +41,13 @@ h3 {
 }
 
 .button {
-  height: 40px;
+  height: 36px;
   padding: 0px 10px;
   font-family: ComfortaaLight;
   font-size: 18px;
   color: white;
-  background-color: #68160e
+  background-color: #68160e;
+  max-width: 165px;
 }
 
 .button:hover {

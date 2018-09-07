@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import "./Welcome.css";
 import API from "../../utils/API";
 import Typeahead from "../Typeahead";
@@ -10,6 +11,7 @@ class Welcome extends React.Component {
       ingredients: [],
       canMake: [],
       almostMake: [],
+      toResults: false,
     };
     this.ingredientCB = this.ingredientCB.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -52,21 +54,25 @@ class Welcome extends React.Component {
               almostMake.push(drink);
             }
           });
-          this.setState({ canMake: canMake, almostMake: almostMake});
         } else {
           console.log("no results found");
         }
+        this.props.searchCB(ingArray, canMake, almostMake);
+        this.setState({ toResults: true, canMake: canMake, almostMake: almostMake });
       });
   }
 
   render() {
+    if (this.state.toResults) {
+      return <Redirect to="/results" />;
+    }
     return (
       <div className="row typeaheadDiv">
         <div className="col-xs-12 col-md-5 pl-5">
           <h1>Welcome! Let's get started.</h1>
           <h3>Find recipes by letting us know which ingredients you have on hand.</h3>
           <div className="welcome-typeahead">
-            <Typeahead ingredientCB={this.ingredientCB} />
+            <Typeahead ingredientCB={this.ingredientCB}/>
           </div>
           <button type="button" className="button float-right" onClick={this.handleSearch}>
             Search Recipes

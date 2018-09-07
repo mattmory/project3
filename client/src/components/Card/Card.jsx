@@ -1,5 +1,5 @@
 import React from "react";
-import "./Style.css";
+import "./Card.css";
 import { Container, Row, Col } from "../Grid";
 import API from "../../utils/API";
 
@@ -49,9 +49,5 @@ class Card extends React.Component {
 
 
 export default Card;
-
-
-
-
 
 // onClick={() => this.props.setClicked(this.props.drink_id

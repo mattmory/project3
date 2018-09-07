@@ -1,0 +1,23 @@
+.ready {
+  margin-top: 28px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+}
+
+.almost {
+  margin-top: 28px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+}
+
+h2.active {
+  color: #68160e;
+  border: none;
+}
+
+.active {
+  border-bottom: 3px solid #68160e;
+  border-radius: 5px;
+}

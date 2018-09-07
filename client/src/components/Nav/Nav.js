@@ -58,7 +58,7 @@ class Navigation extends Component {
               <Link className="nav-link nav-link-style" to="/">ingredients</Link>
             </NavItem>
             <NavItem>
-              <Link className="nav-link nav-link-style" to="/browse">recipes</Link>
+              <Link className="nav-link nav-link-style" to="/recipes">recipes</Link>
             </NavItem>
           </Nav>
           <DropdownItem divider />

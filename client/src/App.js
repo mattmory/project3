@@ -13,9 +13,13 @@ class App extends Component {
     this.state = {
       email: "",
       isAuthenticated: false,
-      id: ""
+      id: "",
+      ingredients: [],
+      canMake: [],
+      almostMake: [],
     };
     this.authCB = this.authCB.bind(this);
+    this.searchCB = this.searchCB.bind(this);
   }
 
   authCB(email, isAuthenticated, id) {
@@ -26,13 +30,23 @@ class App extends Component {
     });
   }
 
+  searchCB(ingredients, canMake, almostMake) {
+    this.setState({
+      ingredients: ingredients,
+      canMake: canMake,
+      almostMake: almostMake,
+    });
+  }
+
   render() {
     return (
       <Router>
         <div id="routerDiv">
           <Navigation email={this.state.email} isAuthenticated={this.state.isAuthenticated} id={this.state.id} />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/"
+              render={props => <Home searchCB={this.searchCB} /> }
+            />
             <Route
               exact path="/account"
               render={props => <Account authCB={this.authCB} />}
@@ -42,7 +56,9 @@ class App extends Component {
               render={props => <Favorites
                 userId={this.state.id} isAuthenticated={this.state.isAuthenticated} />}
             />
-            <Route exact path="/results" component={Results}/>
+            <Route exact path="/results"
+              render={props => <Results ingredients={this.state.ingredients} canMake={this.state.canMake} almostMake={this.state.almostMake} /> }
+            />
             <Route component={Home} />
           </Switch>
         </div>
