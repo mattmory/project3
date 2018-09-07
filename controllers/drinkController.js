@@ -88,54 +88,47 @@ module.exports = {
     /* build SQL String */
     let queryString = "SELECT distinct " +
       "drinks.id as drinkID, drinks.name, drinks.thumb_img_url, " +
-      "(select count(*) from favorites where drinkID = drink_id group by drink_id ) as favCount " +
+      "(select count(*) from favorites where drinkID = drink_id group by drink_id ) as favCount, " +
+      "(select group_concat(ingredients.name) from drink_contents, ingredients where drink_contents.ingredient_id = ingredients.id and drink_contents.drink_id = drinkID and " + searchStringAnd + " and drink_contents.required = 1 group by drink_contents.drink_id) as missingIng " +
       "FROM drinks AS drinks INNER JOIN drink_contents AS drink_contents ON drinks.id = drink_contents.drink_id " +
       " AND " + searchStringOr + ";";
 
     /* SQL String built */
     let dD = 0;
-    let dI = 0;
+
+    let curMissing = [];
     return db.sequelize.query(queryString, { type: db.sequelize.QueryTypes.SELECT })
-      // return connection.query(queryString, { type: db.sequelize.QueryTypes.SELECT })
+      
       .then((dbDrinks) => {
-        // console.log(dbDrinks)
-        return Promise.all(dbDrinks.map((dbDrink) => {
+        dbDrinks.forEach((dbDrink) => {
+          curMissing = [];
+          if(dbDrink.missingIng !== null)
+          {
+            curMissing = dbDrink.missingIng.split(",");
+          }
           finalJSON[dD] = {
             id: dbDrink.drinkID,
             name: dbDrink.name,
             imgUrl: dbDrink.thumb_img_url,
-            favedCnt: dbDrink.favCount === null ? 0: dbDrink.favCount,
-            missingIngCount: 0,
-            missingIng: []
+            favedCnt: dbDrink.favCount === null ? 0 : dbDrink.favCount,
+            missingIngCount: curMissing.length === null ? 0 : curMissing.length,
+            missingIng: curMissing
+          };
+          for(let i=0;i<curMissing.length;i++)
+          {
+            missingIngredientCounter(curMissing[i]);
           }
           dD++;
-
-          let missingIngQuery = "select drink_contents.ingredient_id, ingredients.name from ingredients, drink_contents where drink_contents.drink_id = " + dbDrink.drinkID + " and " + searchStringAnd + " and ingredients.id = drink_contents.ingredient_id and drink_contents.required = 1";
-          return db.sequelize.query(missingIngQuery, { type: db.sequelize.QueryTypes.SELECT })
-            //return connection.query(missingIngQuery, { type: db.sequelize.QueryTypes.SELECT })
-            .then(dbIng => {
-              let missingIng = [];
-              if (dbIng.length > 0) {
-                dbIng.forEach(function (ing) {
-                  missingIng.push(ing.name);
-                  missingIngredientCounter(ing.name);
-                })
-                finalJSON[dI].missingIngCount = dbIng.length;
-                finalJSON[dI].missingIng = missingIng;
-              }
-              dI++;
-              return Promise.resolve(null);
-            })
-        }))
+        });
       })
 
       .then(function () {
-        finalJSON.sort(function (a, b) { return a.missingIngCount - b.missingIngCount });
-        ingredientArray.sort(function (a, b) { return b.count - a.count })
+        finalJSON.sort(function (a, b) { return a.missingIngCount - b.missingIngCount; });
+        ingredientArray.sort(function (a, b) { return b.count - a.count; });
         let returnJSON = { drinks: finalJSON, ingredients: ingredientArray };
         res.json(returnJSON);
       })
-      .catch(function (err) { console.log(err) })
+      .catch(function (err) { console.log(err); });
 
   },
 
@@ -146,7 +139,7 @@ module.exports = {
     db.drinks.findOne({
       where: { name: req.body.name },
     }).then(function (drink) {
-      if (drink != null) {
+      if (drink !== null) {
         res.status(200).send("Drink Exists");
       }
       else {
@@ -180,21 +173,20 @@ module.exports = {
   }
 }
 
- function addContents(drinkId, ingID, amount, fn) {
+function addContents(drinkId, ingID, amount, fn) {
   db.drink_contents.create({
     drink_id: drinkId,
     ingredient_id: ingID,
     amount: amount
   }
   ).then(function () {
-    fn()
+    fn();
   }).catch(function (err) {
     throw err;
   });
 }
 
 function missingIngredientCounter(ingredient) {
-  console.log("Looking for " + ingredient)
   let matchFound = false;
   for (let i = 0; i < ingredientArray.length; i++) {
     if (ingredientArray[i].ingredient === ingredient) {
@@ -207,4 +199,4 @@ function missingIngredientCounter(ingredient) {
     ingredientArray.push({ ingredient: ingredient, count: 1 })
   }
 
-};
+}
