@@ -8,9 +8,9 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredients: [],
-      canMake: [],
-      almostMake: [],
+      ingredients: this.props.ingredients,
+      canMake: this.props.canMake,
+      almostMake: this.props.almostMake,
     };
     this.ingredientCB = this.ingredientCB.bind(this);
   }
