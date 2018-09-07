@@ -26,6 +26,9 @@ class ResultsTab extends React.Component {
     return this.props.canMake.map(drink => (
       <Card key={drink.id}
         drinkId={drink.id}
+        userId={this.props.userId}
+        isAuthenticated={this.props.isAuthenticated}
+        fromFaves={false}
       />
     ));
   }
@@ -34,6 +37,9 @@ class ResultsTab extends React.Component {
     return this.props.almostMake.map(drink => (
       <Card key={drink.id}
         drinkId={drink.id}
+        userId={this.props.userId}
+        isAuthenticated={this.props.isAuthenticated}
+        fromFaves={false}
       />
     ));
   }

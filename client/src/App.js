@@ -58,7 +58,9 @@ class App extends Component {
                 userId={this.state.id} isAuthenticated={this.state.isAuthenticated} />}
             />
             <Route exact path="/results"
-              render={props => <Results ingredients={this.state.ingredients} canMake={this.state.canMake} almostMake={this.state.almostMake} /> }
+              render={props => <Results 
+                ingredients={this.state.ingredients} canMake={this.state.canMake} almostMake={this.state.almostMake} 
+                userId={this.state.id} isAuthenticated={this.state.isAuthenticated}/> }
             />
             <Route exact path = "/recipes" component={Recipes} />
             <Route component={Home} />
