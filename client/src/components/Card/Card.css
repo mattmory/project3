@@ -31,7 +31,7 @@
   }
 
   span.drink-icon-card:hover {
-    fill: rgba(0, 0, 0, 0.7);
+    fill: rgba(0, 0, 0, 0.5);
   }
 
   span.active {
