@@ -30,6 +30,10 @@
   background-color: #ededed;
 }
 
+.VirtualizedSelectFocusedOption {
+  background-color: white;
+}
+
 .ReactVirtualized__Table__sortableHeaderIcon .Select-option.is-focused  {
   fill: white !important;
 }
