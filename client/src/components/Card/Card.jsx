@@ -19,7 +19,6 @@ class Card extends React.Component {
   loadDrink = () => {
     API.getDrinkById(this.props.drinkId)
       .then(res => {
-        console.log("test");
         this.setState({ drinkData: res.data });
       })
       .catch(err => console.log(err));
