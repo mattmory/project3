@@ -30,7 +30,7 @@ class Card extends React.Component {
       // Check to see if the action was from the favorite page, if so, delete the fav.
       if (this.props.fromFaves) {
         API.deleteFavorite(this.props.userId, this.state.drinkData.drinkID);
-        this.setState({drinkData: null});
+        this.setState({ drinkData: null });
       }
       // If the action no from favorites, add a favorite
       else {

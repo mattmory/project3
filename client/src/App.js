@@ -6,6 +6,7 @@ import Account from "./pages/Account";
 import Favorites from "./pages/Favorites";
 import Results from "./pages/Results";
 import Navigation from "./components/Nav";
+import Recipes from "./pages/Recipes";
 
 class App extends Component {
   constructor(props) {
@@ -61,6 +62,7 @@ class App extends Component {
                 ingredients={this.state.ingredients} canMake={this.state.canMake} almostMake={this.state.almostMake} 
                 userId={this.state.id} isAuthenticated={this.state.isAuthenticated}/> }
             />
+            <Route exact path = "/recipes" component={Recipes} />
             <Route component={Home} />
           </Switch>
         </div>
