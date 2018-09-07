@@ -18,3 +18,10 @@
   filter: brightness(140%);
   text-decoration: underline;
 }
+
+.modalText {
+  font-family: MerriweatherRegular;
+    font-size: 14px;
+    color: #68160e;
+}
+
