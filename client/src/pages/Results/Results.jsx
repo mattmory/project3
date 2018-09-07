@@ -62,7 +62,8 @@ class Results extends React.Component {
             <Typeahead ingredientCB={this.ingredientCB} ingredients={this.props.ingredients} />
           </div>
         </div>
-        <ResultsTab canMake={this.state.canMake} almostMake={this.state.almostMake}/>
+        <ResultsTab canMake={this.state.canMake} almostMake={this.state.almostMake}
+        userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
       </div>
     );
   }
