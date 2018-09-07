@@ -24,9 +24,6 @@ class Favorites extends React.Component {
     this.loadUserFavorites();
   }
 
-
-  //API.getAllFavorites
-
   loadUserFavorites = () => {
     API.getUsersFavorites(this.state.userId)
       .then(res => {
