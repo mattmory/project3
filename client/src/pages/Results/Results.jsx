@@ -46,10 +46,10 @@ class Results extends React.Component {
               almostMake.push(drink);
             }
           });
+          this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
         } else {
           console.log("no results found");
         }
-        this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
       });
   }
 

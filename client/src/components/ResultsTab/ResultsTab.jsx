@@ -52,9 +52,9 @@ class ResultsTab extends React.Component {
               <h2 className={this.state.ready ? "" : "active"}>Almost there</h2>
             </div>
           </div>
-          <Row>
+          <div className="row">
             {this.state.ready ? this.getCanMake() : this.getAlmostMake()}
-          </Row>
+          </div>
         </div>
       </div>
     );

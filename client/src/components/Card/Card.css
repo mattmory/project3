@@ -1,53 +1,39 @@
 .card {
-    background: #fff;
-    border-radius: 1px rounded;
-    height: 400px;
-    margin: 1rem;
-    position: relative;
-    width: 315px;
-    box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+    max-width: 450px;
+    min-width: 300px;
+    margin: 20px 6px 0px 6px;
+  }
+
+  .card-image-top {
+    max-width: 100%;
+    max-height: auto;
   }
   
-  .card > .img-container {
-    text-align: center;
-    background:silver;
+  .card-text {
+    overflow: auto;
+    height: 150px;
   }
-  .card > .img-container > img {
-    width: 100%;
-    height: 65%;
-  }
-  
-  .card > .content {
-    margin-top: 2.5px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    overflow: scroll;
+
+  .drinkName {
     color: black;
-      font-size: 14px;
-      align-content: center;
-      justify-content: center;
-      text-shadow: .1rem  #f8f5de;
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
   }
   
-  .card > .content > ul {
-    list-style-type: none;
+  .card-body {
+    padding: 12px 12px 12px 12px
   }
-  
-  .card > .content > ul > li {
-    margin-top: 18px;
+
+  .card-text {
+    max-height: 200px;
   }
-/*   
-  .card > .remove {
-    color: #ff1744;
-    font-size: 48px;
-    position: absolute;
-    top: -20px;
-    right: 5px;
-    cursor: pointer;
+
+  .card-instructions {
+    padding-top: 12px;
   }
-  
-  .card > .remove:hover {
-    color: #d50000;
-  } */
-  
+
+  span.drink-icon-card:hover {
+    fill: rgba(0, 0, 0, 0.7);
+  }
+
+  span.active {
+    fill: #68160e
+  }

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
-import { Container, Row, Col } from "../Grid";
 import API from "../../utils/API";
+import DrinkIcon from "../DrinkIcon";
 
 
 class Card extends React.Component {
@@ -26,27 +26,30 @@ class Card extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.drinkData !== null ? (
-          <div className="card">
-            <div className="img-container">
-              <img alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
-            </div>
-            <div className="content">
-              <h4>{this.state.drinkData.drinkName}</h4>
-              {this.state.drinkData.instructions}
-              {this.state.drinkData.contents.map(Ing => (
-                <span><h6>{Ing.ingredientName}: {Ing.ingredientAmount}</h6></span>
-              ))}
+      this.state.drinkData !== null ? (
+        <div className="col-sm-12 col-md-6 col-lg-4">
+          <div className="card rounded">
+            <img className="card-image-top rounded-top" alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
+            <div className="card-body">
+              <h1 className="drinkName">{this.state.drinkData.drinkName}
+                <span className="drink-icon-card float-right">
+                  <DrinkIcon />
+                </span>
+              </h1>
+              <div className="card-text">
+                {this.state.drinkData.contents.map(Ing => (
+                  <div>{Ing.ingredientName}: {Ing.ingredientAmount}</div>
+                ))}
+                <p className="card-instructions">{this.state.drinkData.instructions}</p>
+              </div>
             </div>
           </div>
-        ) :
-          (<span></span>)}
-      </div>
+        </div>
+      ) :
+        (<span></span>)
     );
   }
 }
-
 
 export default Card;
 
