@@ -1,6 +1,6 @@
 .card {
-    max-width: 500px;
-    min-width: 350px;
+    max-width: 450px;
+    min-width: 300px;
     margin: 20px 6px 0px 6px;
   }
 
@@ -9,36 +9,29 @@
     max-height: auto;
   }
   
-  .card > .content {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .card-text {
     overflow: auto;
     height: 150px;
-
   }
-
-  /* .card > .content > ul {
-    list-style-type: none;
-  }
-  
-  .card > .content > ul > li {
-    margin-top: 18px;
-  } */
 
   .drinkName {
     color: black;
   }
-/*   
-  .card > .remove {
-    color: #ff1744;
-    font-size: 48px;
-    position: absolute;
-    top: -20px;
-    right: 5px;
-    cursor: pointer;
+  
+  .card-body {
+    padding: 12px 12px 12px 12px
   }
-  
-  .card > .remove:hover {
-    color: #d50000;
+
+  .card-text {
+    max-height: 200px;
+  }
+
+  .cardInstructions {
+    padding-top: 12px;
+  }
+
+  /* .drink-icon-card {
+    position: relative;
+    top: 5px;
+    right: 5px;
   } */
-  
