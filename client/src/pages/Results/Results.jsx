@@ -33,6 +33,7 @@ class Results extends React.Component {
       }).join("&");
     }
     // API call to get drinks by ingredient id
+    console.log(ingId);
     API.getDrinksByIngs(ingId)
       .then((res) => {
         if (res) {
