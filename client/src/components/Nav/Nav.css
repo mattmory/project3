@@ -14,6 +14,12 @@
     color: black;
 }
 
+.navbar-light .navbar-nav .nav-link:focus {
+  color: #68160e;
+  filter: brightness(155%);
+}
+
+
 a.nav-link-style {
   color: black;
 }
@@ -23,10 +29,15 @@ a.nav-link-style:hover {
   filter: brightness(140%);
 }
 
+
+
+
+
 .navbar-light .navbar-nav .nav-link:hover {
   color: #68160e;
   filter: brightness(140%);
 }
+
 
 .favorites {
   color: black;
