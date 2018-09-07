@@ -13,6 +13,7 @@ class Typeahead extends React.Component {
 
     this.state = {
       options: [],
+      selectValue: this.props.ingredients,
     };
 
     this.getIngredients = this.getIngredients.bind(this);
