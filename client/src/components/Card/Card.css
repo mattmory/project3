@@ -26,12 +26,14 @@
     max-height: 200px;
   }
 
-  .cardInstructions {
+  .card-instructions {
     padding-top: 12px;
   }
 
-  /* .drink-icon-card {
-    position: relative;
-    top: 5px;
-    right: 5px;
-  } */
+  span.drink-icon-card:hover {
+    fill: rgba(0, 0, 0, 0.7);
+  }
+
+  span.active {
+    fill: #68160e
+  }

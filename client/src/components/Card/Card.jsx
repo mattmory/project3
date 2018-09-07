@@ -1,6 +1,5 @@
 import React from "react";
 import "./Card.css";
-import { Container, Row, Col } from "../Grid";
 import API from "../../utils/API";
 import DrinkIcon from "../DrinkIcon";
 
@@ -41,7 +40,7 @@ class Card extends React.Component {
                 {this.state.drinkData.contents.map(Ing => (
                   <div>{Ing.ingredientName}: {Ing.ingredientAmount}</div>
                 ))}
-                <p className="cardInstructions">{this.state.drinkData.instructions}</p>
+                <p className="card-instructions">{this.state.drinkData.instructions}</p>
               </div>
             </div>
           </div>
@@ -51,7 +50,6 @@ class Card extends React.Component {
     );
   }
 }
-
 
 export default Card;
 
