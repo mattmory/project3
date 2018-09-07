@@ -1,5 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+
+
 import "./Login.css";
 import API from "../../utils/API";
 
@@ -12,6 +16,8 @@ class Login extends React.Component {
       isRegistering: false,
       instructionText: "Login to see your favorites.",
       toHome: false,
+      modal: false,
+      modalMsg: ""
     };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -19,6 +25,7 @@ class Login extends React.Component {
     this.handleToRegister = this.handleToRegister.bind(this);
     this.getButton = this.getButton.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   handleEmailChange(event) {
@@ -35,8 +42,12 @@ class Login extends React.Component {
       // New user registration
       API.userRegister(this.state.email, this.state.password)
         .then((res) => {
-          // Auto login on successful registration
-          this.handleLogin();
+          if (res.data.message === "Account creation successful.") {
+            this.handleLogin();
+          }
+          else {
+            this.setState({ modal: true, modalMsg: "Error creating account." });
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -55,6 +66,7 @@ class Login extends React.Component {
         this.setState({ toHome: true });
       })
       .catch((err) => {
+        this.setState({ modal: true, modalMsg: "Please review your email and password." });
         console.log(err);
       });
   }
@@ -85,6 +97,13 @@ class Login extends React.Component {
     }
   }
 
+  closeModal() {
+    this.setState({
+      modal: false,
+      modalMsg: ""
+    });
+  }
+
   render() {
     if (this.state.toHome) {
       return <Redirect to="/" />;
@@ -104,7 +123,17 @@ class Login extends React.Component {
             {this.getButton()}
           </div>
         </form>
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader><span className="logo"><b>cocktail</b>creator</span></ModalHeader>
+          <ModalBody>
+            <span className="modalText">{this.state.modalMsg}</span>
+          </ModalBody>
+          <ModalFooter>
+            <button onClick={this.closeModal} class="button float-right">Ok</button>
+          </ModalFooter>
+        </Modal>
       </div>
+
     );
   }
 }
