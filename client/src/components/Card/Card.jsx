@@ -26,23 +26,21 @@ class Card extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.drinkData !== null ? (
-          <div className="card">
-            <div className="img-container">
-              <img alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
-            </div>
+      this.state.drinkData !== null ? (
+        <div className="col-4">
+          <div className="card rounded">
+            <img className="card-image-top rounded-top" alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
             <div className="content">
-              <h4>{this.state.drinkData.drinkName}</h4>
-              {this.state.drinkData.instructions}
+              <h1 className="drinkName">{this.state.drinkData.drinkName}</h1>
               {this.state.drinkData.contents.map(Ing => (
-                <span><h6>{Ing.ingredientName}: {Ing.ingredientAmount}</h6></span>
+                <div>{Ing.ingredientName}: {Ing.ingredientAmount}</div>
               ))}
+              {this.state.drinkData.instructions}
             </div>
           </div>
-        ) :
-          (<span></span>)}
-      </div>
+        </div>
+      ) :
+        (<span></span>)
     );
   }
 }
