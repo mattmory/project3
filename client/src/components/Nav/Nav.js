@@ -49,22 +49,24 @@ class Navigation extends Component {
 
   render() {
     return (
-      <Navbar color="light" light expand="md" fixed="top">
-        <NavbarBrand><span className="logo"><b>cocktail</b>creator</span></NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="mx-auto" navbar>
-            <NavItem>
-              <Link className="nav-link nav-link-style" to="/">ingredients</Link>
-            </NavItem>
-            <NavItem>
-              <Link className="nav-link nav-link-style" to="/recipes">recipes</Link>
-            </NavItem>
-          </Nav>
-          <DropdownItem divider />
-          {this.getLink()}
-        </Collapse>
-      </Navbar>
+      <div>
+        <Navbar color="faded" light expand="md" toggleNavKey={1}>
+          <NavbarBrand><span className="logo"><b>cocktail</b>creator</span></NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="mx-auto" navbar>
+              <NavItem>
+                <Link className="nav-link nav-link-style" to="/">ingredients</Link>
+              </NavItem>
+              <NavItem>
+                <Link className="nav-link nav-link-style" to="/recipes">recipes</Link>
+              </NavItem>
+            </Nav>
+            <DropdownItem divider />
+            {this.getLink()}
+          </Collapse>
+        </Navbar>
+      </div>
     );
   }
 }
