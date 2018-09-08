@@ -1,7 +1,6 @@
 .navbar {
-  height: 50px;
   border-bottom: 0.5px solid #ededed;
-  z-index: 2;
+  padding: 0px 16px;
 }
 
 .logo {
@@ -16,7 +15,6 @@
 
 .navbar-light .navbar-nav .nav-link:focus {
   color: #68160e;
-  filter: brightness(155%);
 }
 
 a.nav-link-style {
@@ -50,7 +48,6 @@ a.nav-link-style:hover {
   top: -2px;
 }
 
-.collapse.show {
-  background-color: #f8f9fa;
-  z-index: 1;
+.navbar-toggler {
+  border: none;
 }
