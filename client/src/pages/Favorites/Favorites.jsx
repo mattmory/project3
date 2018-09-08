@@ -38,7 +38,6 @@ class Favorites extends React.Component {
   };
 
   loadTopFavorites = () => {
-    console.log("Now Here");
     API.getAllFavorites()
       .then(res => {
         this.setState({ topFaves: res.data });
@@ -51,7 +50,7 @@ class Favorites extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <Container>
+      <div className="favorites-container">
         {this.state.userFaves.length ? (
           <Row>
             {this.state.userFaves.map(Fav => (
@@ -65,19 +64,18 @@ class Favorites extends React.Component {
           </Row>
         ) : (
           <div>
-             <span>You have no favorites but here are our most favorited drinks for you to try.</span>
+            <span>You have no favorites but here are our most favorited drinks for you to try.</span>
             <Row>
-               {this.state.topFaves.map(Fav => (
+              {this.state.topFaves.map(Fav => (
                 <Card key={Fav.drink_id}
                   drinkId={Fav.drink_id}
                   userId={this.state.userId}
-                  isAuthenticated={this.state.isAuthenticated}
-                  fromFaves={true}
+                  isAuthenticated={this.state.isAuthenticated}                    fromFaves={true}
                 />
               ))}
             </Row>
-            </div>)}
-      </Container>
+          </div>)}
+      </div>
     );
   }
 }
