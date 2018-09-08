@@ -81,15 +81,17 @@ class RecipesIS extends React.Component {
 
   render() {
     return (
-      <div className="row recipe-container">
-        {this.state.recipeIds.map(drink => (
-          <Card key={drink.id}
-            drinkId={drink.id}
-            userId={this.props.userId}
-            isAuthenticated={this.props.isAuthenticated}
-            fromFaves={false}
-          />
-        ))}
+      <div className="container recipe-container">
+        <div className="row">
+          {this.state.recipeIds.map(drink => (
+            <Card key={drink.id}
+              drinkId={drink.id}
+              userId={this.props.userId}
+              isAuthenticated={this.props.isAuthenticated}
+              fromFaves={false}
+            />
+          ))}
+        </div>
       </div>
     );
   }
