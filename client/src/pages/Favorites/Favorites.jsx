@@ -5,8 +5,6 @@ import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 
 import Card from "../../components/Card/";
-import { Row, Col, Container } from "../../components/Grid"
-
 
 class Favorites extends React.Component {
 
@@ -50,9 +48,9 @@ class Favorites extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="favorites-container">
+      <div className="favorites-container container">
         {this.state.userFaves.length ? (
-          <Row>
+          <div className="row">
             {this.state.userFaves.map(Fav => (
               <Card key={Fav.drink_id}
                 drinkId={Fav.drink_id}
@@ -61,19 +59,20 @@ class Favorites extends React.Component {
                 fromFaves={true}
               />
             ))}
-          </Row>
+          </div>
         ) : (
           <div>
             <span>You have no favorites but here are our most favorited drinks for you to try.</span>
-            <Row>
+            <div className="row">
               {this.state.topFaves.map(Fav => (
                 <Card key={Fav.drink_id}
                   drinkId={Fav.drink_id}
                   userId={this.state.userId}
-                  isAuthenticated={this.state.isAuthenticated}                    fromFaves={true}
+                  isAuthenticated={this.state.isAuthenticated}
+                  fromFaves={true}
                 />
               ))}
-            </Row>
+            </div>
           </div>)}
       </div>
     );
