@@ -51,7 +51,11 @@ class Navigation extends Component {
     return (
       <div>
         <Navbar color="faded" light expand="md" toggleNavKey={1}>
-          <NavbarBrand><span className="logo"><b>cocktail</b>creator</span></NavbarBrand>
+          <NavbarBrand>
+            <Link to="/" className="logoLink">
+              <span className="logo"><b>cocktail</b>creator</span>
+            </Link>
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mx-auto" navbar>

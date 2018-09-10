@@ -8,6 +8,10 @@
     font-size: 24px;
     color: black;   
 }
+
+a.logoLink:hover {
+  text-decoration: none;
+}
   
 .navbar-light .navbar-nav .nav-link {
     color: black;
