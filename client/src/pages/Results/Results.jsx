@@ -31,9 +31,12 @@ class Results extends React.Component {
       ingId = ingArray.map((ing) => {
         return ing.value;
       }).join("&");
+    } else {
+      // Empty displays
+      this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
     }
+
     // API call to get drinks by ingredient id
-    console.log(ingId);
     API.getDrinksByIngs(ingId)
       .then((res) => {
         if (res) {
@@ -41,7 +44,7 @@ class Results extends React.Component {
             // Return drinks user can make
             if (drink.missingIngCount === 0) {
               canMake.push(drink);
-            } else if (drink.missingIngCount < 2 && drink.missingIngCount > 0) {
+            } else if (drink.missingIngCount < 5 && drink.missingIngCount > 0) {
               // Return drinks user can almost make
               almostMake.push(drink);
             }
@@ -54,7 +57,6 @@ class Results extends React.Component {
   }
 
   render() {
-    console.log(this.state.ingredients, this.state.canMake, this.state.almostMake);
     return (
       <div className="resultsPage">
         <div className="row resultsTypeahead justify-content-center">
@@ -63,7 +65,7 @@ class Results extends React.Component {
           </div>
         </div>
         <ResultsTab canMake={this.state.canMake} almostMake={this.state.almostMake}
-        userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
+          userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
       </div>
     );
   }

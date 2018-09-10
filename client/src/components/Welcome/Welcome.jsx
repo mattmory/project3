@@ -49,7 +49,7 @@ class Welcome extends React.Component {
             // Return drinks user can make
             if (drink.missingIngCount === 0) {
               canMake.push(drink);
-            } else if (drink.missingIngCount < 2 && drink.missingIngCount > 0) {
+            } else if (drink.missingIngCount < 5 && drink.missingIngCount > 0) {
               // Return drinks user can almost make
               almostMake.push(drink);
             }

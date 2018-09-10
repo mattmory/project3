@@ -1,9 +1,7 @@
 import React from "react";
 import "./ResultsTab.css";
 
-import API from "../../utils/API";
 import Card from "../../components/Card/";
-import { Row, Col, Container } from "../../components/Grid";
 
 class ResultsTab extends React.Component {
   constructor(props) {
