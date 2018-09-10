@@ -5,8 +5,6 @@ import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 
 import Card from "../../components/Card/";
-import { Row, Col, Container } from "../../components/Grid"
-
 
 class Favorites extends React.Component {
 
@@ -15,41 +13,68 @@ class Favorites extends React.Component {
     this.state = {
       userId: props.userId,
       isAuthenticated: props.isAuthenticated,
-      userFaves: []
+      userFaves: [],
+      topFaves: []
     };
   }
 
   componentDidMount() {
-    this.loadFavorites();
+    this.loadUserFavorites();
   }
 
-  loadFavorites = () => {
+  loadUserFavorites = () => {
     API.getUsersFavorites(this.state.userId)
       .then(res => {
-        this.setState({ userFaves: res.data });
+        if (res.data.length > 0) {
+          this.setState({ userFaves: res.data });
+        }
+        else {
+          this.loadTopFavorites();
+        }
       })
       .catch(err => console.log(err));
   };
 
+  loadTopFavorites = () => {
+    API.getAllFavorites()
+      .then(res => {
+        this.setState({ topFaves: res.data });
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     if (!this.state.isAuthenticated) {
       return <Redirect to="/" />;
     }
     return (
-      <Container>
+      <div className="favorites-container container">
         {this.state.userFaves.length ? (
-          <Row>
+          <div className="row">
             {this.state.userFaves.map(Fav => (
               <Card key={Fav.drink_id}
                 drinkId={Fav.drink_id}
+                userId={this.state.userId}
+                isAuthenticated={this.state.isAuthenticated}
+                fromFaves={true}
               />
             ))}
-          </Row>
+          </div>
         ) : (
-            <span>You have no favorites.. get drinking!</span>
-          )}
-      </Container>
+          <div>
+            <span>You have no favorites but here are our most favorited drinks for you to try.</span>
+            <div className="row">
+              {this.state.topFaves.map(Fav => (
+                <Card key={Fav.drink_id}
+                  drinkId={Fav.drink_id}
+                  userId={this.state.userId}
+                  isAuthenticated={this.state.isAuthenticated}
+                  fromFaves={true}
+                />
+              ))}
+            </div>
+          </div>)}
+      </div>
     );
   }
 }
