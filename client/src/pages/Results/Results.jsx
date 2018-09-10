@@ -31,7 +31,11 @@ class Results extends React.Component {
       ingId = ingArray.map((ing) => {
         return ing.value;
       }).join("&");
+    } else {
+      // Empty displays
+      this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
     }
+
     // API call to get drinks by ingredient id
     API.getDrinksByIngs(ingId)
       .then((res) => {
@@ -68,7 +72,7 @@ class Results extends React.Component {
           </div>
         </div>
         <ResultsTab canMake={this.state.canMake} almostMake={this.state.almostMake}
-        userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
+          userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
       </div>
     );
   }
