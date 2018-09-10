@@ -1,0 +1,39 @@
+.card {
+    max-width: 450px;
+    min-width: 300px;
+    margin: 20px 6px 0px 6px;
+  }
+
+  .card-image-top {
+    max-width: 100%;
+    max-height: auto;
+  }
+  
+  .card-text {
+    overflow: auto;
+    height: 150px;
+  }
+
+  .drinkName {
+    color: black;
+  }
+  
+  .card-body {
+    padding: 12px 12px 12px 12px
+  }
+
+  .card-text {
+    max-height: 200px;
+  }
+
+  .card-instructions {
+    padding-top: 12px;
+  }
+
+  span.drink-icon-card:hover {
+    fill: rgba(0, 0, 0, 0.5);
+  }
+
+  span.active {
+    fill: #68160e
+  }
