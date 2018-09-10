@@ -49,6 +49,12 @@ class Results extends React.Component {
               almostMake.push(drink);
             }
           });
+          // Sort Drink Arrays
+          // canMake -> Alpha
+          // almostMake -> missingIngCount
+          canMake.sort(function (a, b) { return a.drinkName - b.drinkName; });
+          almostMake.sort(function (a, b) { return a.missingIngCount - b.missingIngCount; });
+
           this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
         } else {
           console.log("no results found");
@@ -57,6 +63,7 @@ class Results extends React.Component {
   }
 
   render() {
+    //console.log(this.state.ingredients, this.state.canMake, this.state.almostMake);
     return (
       <div className="resultsPage">
         <div className="row resultsTypeahead justify-content-center">

@@ -2,6 +2,8 @@ import React from "react";
 import "./ResultsTab.css";
 
 import Card from "../../components/Card/";
+import CardMissing from "../../components/CardMissing/";
+import { Row, Col, Container } from "../../components/Grid";
 
 class ResultsTab extends React.Component {
   constructor(props) {
@@ -33,11 +35,12 @@ class ResultsTab extends React.Component {
 
   getAlmostMake() {
     return this.props.almostMake.map(drink => (
-      <Card key={drink.id}
+      <CardMissing key={drink.id}
         drinkId={drink.id}
         userId={this.props.userId}
         isAuthenticated={this.props.isAuthenticated}
         fromFaves={false}
+        missingIng={drink.missingIng}
       />
     ));
   }
