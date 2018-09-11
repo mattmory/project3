@@ -37,7 +37,7 @@ class Favorites extends React.Component {
   loadTopFavorites = () => {
     API.getAllFavorites()
       .then(res => {
-        this.setState({ topFaves: res.data });
+        this.setState({ userFaves: [], topFaves: res.data });
       })
       .catch(err => console.log(err));
   };
