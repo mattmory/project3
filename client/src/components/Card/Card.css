@@ -30,10 +30,18 @@
     padding-top: 12px;
   }
 
+  .drink-icon-card {
+    width: 28px;
+    padding: 0px 10px 0px 6.5px;
+  }
+
   span.drink-icon-card:hover {
     fill: rgba(0, 0, 0, 0.5);
+    filter: brightness(120%);
   }
 
   span.favorited {
-    fill: #68160e;
+    fill: white;
+    background-color: #68160e;
+    border-radius: 50%;
   }
