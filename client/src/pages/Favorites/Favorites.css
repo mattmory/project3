@@ -1,0 +1,6 @@
+.nofavoritesdiv {
+  margin-top: 28px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  cursor: pointer;
+}
