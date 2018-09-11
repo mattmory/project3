@@ -1,6 +1,7 @@
 import React from "react";
 import "./ResultsTab.css";
 
+import API from "../../utils/API";
 import Card from "../../components/Card/";
 import CardMissing from "../../components/CardMissing/";
 import { Row, Col, Container } from "../../components/Grid";
@@ -10,10 +11,16 @@ class ResultsTab extends React.Component {
     super(props);
     this.state = {
       ready: true,
+      userFaves: [],
     };
     this.toggleReady = this.toggleReady.bind(this);
     this.getCanMake = this.getCanMake.bind(this);
     this.getAlmostMake = this.getAlmostMake.bind(this);
+    this.loadUserFavorites = this.loadUserFavorites.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadUserFavorites();
   }
 
   toggleReady(event) {
@@ -23,14 +30,15 @@ class ResultsTab extends React.Component {
   }
 
   getCanMake() {
-    return this.props.canMake.map(drink => (
-      <Card key={drink.id}
+    return this.props.canMake.map(drink => {
+      return (<Card key={drink.id}
         drinkId={drink.id}
         userId={this.props.userId}
         isAuthenticated={this.props.isAuthenticated}
-        fromFaves={false}
-      />
-    ));
+        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
+        updateFaves={() => this.loadUserFavorites()}
+      />);
+    });
   }
 
   getAlmostMake() {
@@ -39,11 +47,19 @@ class ResultsTab extends React.Component {
         drinkId={drink.id}
         userId={this.props.userId}
         isAuthenticated={this.props.isAuthenticated}
-        fromFaves={false}
+        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
+        updateFaves={() => this.loadUserFavorites()}
         missingIng={drink.missingIng}
       />
     ));
   }
+
+  loadUserFavorites = () => {
+    API.getUsersFavorites(this.props.userId)
+      .then(res => {
+        this.setState({ userFaves: res.data });
+      }).catch(err => console.log(err));
+  };
 
   render() {
     let readyClassNames = this.state.ready ? "col-6 ready active" : "col-6 ready";

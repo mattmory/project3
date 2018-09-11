@@ -8,7 +8,7 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      drinkData: null
+      drinkData: null,
     };
   }
 
@@ -29,17 +29,22 @@ class Card extends React.Component {
     if (this.props.isAuthenticated) {
       // Check to see if the action was from the favorite page, if so, delete the fav.
       if (this.props.fromFaves) {
-        API.deleteFavorite(this.props.userId, this.state.drinkData.drinkID);
-        this.setState({ drinkData: null });
-      }
-      // If the action no from favorites, add a favorite
-      else {
-        API.addFavorite(this.props.userId, this.state.drinkData.drinkID);
+        API.deleteFavorite(this.props.userId, this.state.drinkData.drinkID)
+          .then(() => {
+            this.props.updateFaves();
+          });
+      } else {
+        // If the action no from favorites, add a favorite
+        API.addFavorite(this.props.userId, this.state.drinkData.drinkID)
+          .then(() => {
+            this.props.updateFaves();
+          });
       }
     }
   };
 
   render() {
+    let favClassName = this.props.fromFaves ? "drink-icon-card float-right favorited" : "drink-icon-card float-right";
     return (
       this.state.drinkData !== null ? (
         <div className="col-sm-12 col-md-6 col-lg-4">
@@ -47,7 +52,7 @@ class Card extends React.Component {
             <img className="card-image-top rounded-top" alt={this.state.drinkData.drinkName} src={this.state.drinkData.thumbImg} />
             <div className="card-body">
               <h1 className="drinkName">{this.state.drinkData.drinkName}
-                <span className="drink-icon-card float-right" onClick={() => this.updateFavorite(this.props.drinkId)}>
+                <span className={favClassName} onClick={() => this.updateFavorite(this.props.drinkId)}>
                   <DrinkIcon />
                 </span>
               </h1>
