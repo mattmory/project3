@@ -19,6 +19,7 @@ a.logoLink:hover {
 
 .navbar-light .navbar-nav .nav-link:focus {
   color: #68160e;
+  filter: brightness(120%);
 }
 
 a.nav-link-style {
