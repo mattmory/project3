@@ -1,6 +1,7 @@
 import React from "react";
-import "./ResultsTab.css";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+import "./ResultsTab.css";
 import API from "../../utils/API";
 import Card from "../../components/Card/";
 import CardMissing from "../../components/CardMissing/";
@@ -9,9 +10,11 @@ import { Row, Col, Container } from "../../components/Grid";
 class ResultsTab extends React.Component {
   constructor(props) {
     super(props);
+    let startState = (this.props.canMake.length > 0);
     this.state = {
-      ready: true,
+      ready: startState,
       userFaves: [],
+      modal: !startState
     };
     this.toggleReady = this.toggleReady.bind(this);
     this.getCanMake = this.getCanMake.bind(this);
@@ -63,6 +66,12 @@ class ResultsTab extends React.Component {
     }
   };
 
+  closeModal = () => {
+    this.setState({
+      modal: false,
+    });
+  }
+
   render() {
     let readyClassNames = this.state.ready ? "col-6 ready active" : "col-6 ready";
     let almostClassNames = this.state.ready ? "col-6 almost" : "col-6 almost active";
@@ -81,6 +90,15 @@ class ResultsTab extends React.Component {
             {this.state.ready ? this.getCanMake() : this.getAlmostMake()}
           </div>
         </div>
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader><span className="logo"><b>cocktail</b>creator</span></ModalHeader>
+          <ModalBody>
+            <span className="modalText">Almost there. Add a few more ingredients and check <i>Ready to enjoy</i>.</span>
+          </ModalBody>
+          <ModalFooter>
+            <button onClick={this.closeModal} class="button float-right">Ok</button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }
