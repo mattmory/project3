@@ -1,6 +1,8 @@
 import React from "react";
-import "./ResultsTab.css";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+import "./ResultsTab.css";
+import API from "../../utils/API";
 import Card from "../../components/Card/";
 import CardMissing from "../../components/CardMissing/";
 import { Row, Col, Container } from "../../components/Grid";
@@ -8,12 +10,20 @@ import { Row, Col, Container } from "../../components/Grid";
 class ResultsTab extends React.Component {
   constructor(props) {
     super(props);
+    let startState = (this.props.canMake.length > 0);
     this.state = {
-      ready: true,
+      ready: startState,
+      userFaves: [],
+      modal: !startState
     };
     this.toggleReady = this.toggleReady.bind(this);
     this.getCanMake = this.getCanMake.bind(this);
     this.getAlmostMake = this.getAlmostMake.bind(this);
+    this.loadUserFavorites = this.loadUserFavorites.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadUserFavorites();
   }
 
   toggleReady(event) {
@@ -23,14 +33,15 @@ class ResultsTab extends React.Component {
   }
 
   getCanMake() {
-    return this.props.canMake.map(drink => (
-      <Card key={drink.id}
+    return this.props.canMake.map(drink => {
+      return (<Card key={drink.id}
         drinkId={drink.id}
         userId={this.props.userId}
         isAuthenticated={this.props.isAuthenticated}
-        fromFaves={false}
-      />
-    ));
+        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
+        updateFaves={() => this.loadUserFavorites()}
+      />);
+    });
   }
 
   getAlmostMake() {
@@ -39,10 +50,26 @@ class ResultsTab extends React.Component {
         drinkId={drink.id}
         userId={this.props.userId}
         isAuthenticated={this.props.isAuthenticated}
-        fromFaves={false}
+        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
+        updateFaves={() => this.loadUserFavorites()}
         missingIng={drink.missingIng}
       />
     ));
+  }
+
+  loadUserFavorites = () => {
+    if (this.props.isAuthenticated) {
+      API.getUsersFavorites(this.props.userId)
+        .then(res => {
+          this.setState({ userFaves: res.data });
+        }).catch(err => console.log(err));
+    }
+  };
+
+  closeModal = () => {
+    this.setState({
+      modal: false,
+    });
   }
 
   render() {
@@ -63,6 +90,15 @@ class ResultsTab extends React.Component {
             {this.state.ready ? this.getCanMake() : this.getAlmostMake()}
           </div>
         </div>
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader><span className="logo"><b>cocktail</b>creator</span></ModalHeader>
+          <ModalBody>
+            <span className="modalText">Almost there. Add a few more ingredients and check <i>Ready to enjoy</i>.</span>
+          </ModalBody>
+          <ModalFooter>
+            <button onClick={this.closeModal} class="button float-right">Ok</button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }

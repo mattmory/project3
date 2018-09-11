@@ -52,9 +52,8 @@ class Results extends React.Component {
           // Sort Drink Arrays
           // canMake -> Alpha
           // almostMake -> missingIngCount
-          canMake.sort(function (a, b) { return a.drinkName - b.drinkName; });
-          almostMake.sort(function (a, b) { return a.missingIngCount - b.missingIngCount; });
-
+          canMake.sort(function (a, b) { return a.name.localeCompare(b.name)});
+          almostMake.sort(function (a, b) {return a.missingIngCount - b.missingIngCount || a.name.localeCompare(b.name);});
           this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
         } else {
           console.log("no results found");
@@ -63,7 +62,6 @@ class Results extends React.Component {
   }
 
   render() {
-    //console.log(this.state.ingredients, this.state.canMake, this.state.almostMake);
     return (
       <div className="resultsPage">
         <div className="row resultsTypeahead justify-content-center">
@@ -71,7 +69,7 @@ class Results extends React.Component {
             <Typeahead ingredientCB={this.ingredientCB} ingredients={this.props.ingredients} />
           </div>
         </div>
-        <ResultsTab canMake={this.state.canMake} almostMake={this.state.almostMake}
+        <ResultsTab {...this.props} canMake={this.state.canMake} almostMake={this.state.almostMake}
           userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
       </div>
     );

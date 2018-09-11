@@ -27,8 +27,7 @@ class Favorites extends React.Component {
       .then(res => {
         if (res.data.length > 0) {
           this.setState({ userFaves: res.data });
-        }
-        else {
+        } else {
           this.loadTopFavorites();
         }
       })
@@ -38,7 +37,7 @@ class Favorites extends React.Component {
   loadTopFavorites = () => {
     API.getAllFavorites()
       .then(res => {
-        this.setState({ topFaves: res.data });
+        this.setState({ userFaves: [], topFaves: res.data });
       })
       .catch(err => console.log(err));
   };
@@ -57,6 +56,7 @@ class Favorites extends React.Component {
                 userId={this.state.userId}
                 isAuthenticated={this.state.isAuthenticated}
                 fromFaves={true}
+                updateFaves={() => this.loadUserFavorites()}
               />
             ))}
           </div>
@@ -69,7 +69,8 @@ class Favorites extends React.Component {
                   drinkId={Fav.drink_id}
                   userId={this.state.userId}
                   isAuthenticated={this.state.isAuthenticated}
-                  fromFaves={true}
+                  fromFaves={false}
+                  updateFaves={() => this.loadUserFavorites()}
                 />
               ))}
             </div>

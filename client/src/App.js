@@ -47,7 +47,7 @@ class App extends Component {
           <Navigation email={this.state.email} isAuthenticated={this.state.isAuthenticated} id={this.state.id} />
           <Switch>
             <Route exact path="/"
-              render={props => <Home searchCB={this.searchCB} /> }
+              render={props => <Home searchCB={this.searchCB} />}
             />
             <Route
               exact path="/account"
@@ -59,15 +59,21 @@ class App extends Component {
                 userId={this.state.id} isAuthenticated={this.state.isAuthenticated} />}
             />
             <Route exact path="/results"
-              render={props => <Results 
-                ingredients={this.state.ingredients} canMake={this.state.canMake} almostMake={this.state.almostMake} 
-                userId={this.state.id} isAuthenticated={this.state.isAuthenticated}/> }
+              render={props => <Results
+                almostMake={this.state.almostMake}
+                canMake={this.state.canMake}
+                ingredients={this.state.ingredients}
+                isAuthenticated={this.state.isAuthenticated}
+                userId={this.state.id}
+              />}
             />
             {/* <Route exact path = "/recipes" component={Recipes} /> */}
             <Route
               exact path="/recipes"
               render={props => <RecipesIS
-                userId={this.state.id} isAuthenticated={this.state.isAuthenticated} />}
+                isAuthenticated={this.state.isAuthenticated}
+                userId={this.state.id}
+              />}
             />
             <Route component={Home} />
           </Switch>
