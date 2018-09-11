@@ -55,10 +55,12 @@ class ResultsTab extends React.Component {
   }
 
   loadUserFavorites = () => {
-    API.getUsersFavorites(this.props.userId)
-      .then(res => {
-        this.setState({ userFaves: res.data });
-      }).catch(err => console.log(err));
+    if (this.props.isAuthenticated) {
+      API.getUsersFavorites(this.props.userId)
+        .then(res => {
+          this.setState({ userFaves: res.data });
+        }).catch(err => console.log(err));
+    }
   };
 
   render() {
