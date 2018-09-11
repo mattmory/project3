@@ -10,7 +10,7 @@ The typeahead software predicts what the user is going to input, and shows poten
 ## Mission
 
 > Our mission was to create a seamless
-> drink forging experience that hepls the user.
+> drink forging experience for the user.
 > Instead of relying on recipes to make drinks, 
 > our app lets you see what can make based on 
 > what you already have at home.
