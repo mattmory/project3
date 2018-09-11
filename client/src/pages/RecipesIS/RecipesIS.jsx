@@ -11,7 +11,8 @@ class RecipesIS extends React.Component {
       recipeIds: [],
       isLoading: true,
       hasMore: true,
-      loadError: false
+      loadError: false,
+      userFaves: [],
     };
     this.getRecipes = this.getRecipes.bind(this);
     this.loadMoreRecipes = this.loadMoreRecipes.bind(this);
@@ -39,6 +40,7 @@ class RecipesIS extends React.Component {
 
   componentDidMount() {
     this.getRecipes();
+    this.loadUserFavorites();
   }
 
   getRecipes() {
@@ -79,23 +81,36 @@ class RecipesIS extends React.Component {
     });
   };
 
+  loadUserFavorites = () => {
+    if (this.props.isAuthenticated) {
+      API.getUsersFavorites(this.props.userId)
+        .then(res => {
+          this.setState({ userFaves: res.data });
+        }).catch(err => console.log(err));
+    }
+  };
+
+  getCards() {
+    return this.state.recipeIds.map(drink => (
+      <Card key={drink.id}
+        drinkId={drink.id}
+        userId={this.props.userId}
+        isAuthenticated={this.props.isAuthenticated}
+        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
+        updateFaves={() => this.loadUserFavorites()}
+      />
+    ));
+  }
+
   render() {
     return (
       <div className="container recipe-container">
         <div className="row">
-          {this.state.recipeIds.map(drink => (
-            <Card key={drink.id}
-              drinkId={drink.id}
-              userId={this.props.userId}
-              isAuthenticated={this.props.isAuthenticated}
-              fromFaves={false}
-            />
-          ))}
+          {this.getCards()}
         </div>
       </div>
     );
   }
 }
-
 
 export default RecipesIS;
