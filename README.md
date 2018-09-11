@@ -1,7 +1,8 @@
 # Cocktail Creator
 
-![IMG](client/src/assets/images/live_demo.png)
-Format: ![Alt Text](client/src/assets/images/live_demo.png)
+![IMG](client/src/assets/images/mobile_ss.png)
+
+
 
 Our app was created to help users create fantastic drinks using only the ingredients they have available.
 
@@ -44,3 +45,9 @@ Cocktail Creator relies on many different technologies to function. While we are
    [express]: <http://expressjs.com>
    [React]: <http://reactjs.org>
    [ESLint]: <http://eslint.com>
+
+### Desktop
+   ![IMG](client/src/assets/images/live_demo.png)
+### Tablet
+
+   ![IMG](client/src/assets/images/tablet_ss.png)
