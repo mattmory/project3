@@ -52,9 +52,8 @@ class Results extends React.Component {
           // Sort Drink Arrays
           // canMake -> Alpha
           // almostMake -> missingIngCount
-          canMake.sort(function (a, b) { return a.drinkName - b.drinkName; });
-          almostMake.sort(function (a, b) { return a.missingIngCount - b.missingIngCount; });
-
+          canMake.sort(function (a, b) { return a.name.localeCompare(b.name)});
+          almostMake.sort(function (a, b) {return a.missingIngCount - b.missingIngCount || a.name.localeCompare(b.name);});
           this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
         } else {
           console.log("no results found");
