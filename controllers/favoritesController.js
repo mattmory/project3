@@ -8,21 +8,20 @@ module.exports = {
       .then(function (dbFavorites) {
         res.json(dbFavorites[0]);
       })
-      .catch(function (error){
-        console.log(error)
-      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
 
   // Handler for /api/favorites/:userId, Get
   // Returns favorites for the user specified by the userId
   findByUserId: function (req, res) {
-    db.Favorites.findAll({
-      where: {
-        user_id: [req.params.userId]
-      }
-    })
+    db.sequelize.query("select favorites.drink_id from favorites, drinks where favorites.drink_id = drinks.id and favorites.user_id = " + req.params.userId + " order by drinks.name;",{type: db.Sequelize.QueryTypes.SELECT})
       .then(function (dbFavorites) {
         res.json(dbFavorites);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   },
 
@@ -48,14 +47,16 @@ module.exports = {
       throw err;
     })
   },
- 
+
   // Handler for /api/favorites, Delete
   // Deletes the favorite specified by the drink_id and user_id of the body
   deleteFavorite: function (req, res) {
-    db.Favorites.destroy({where: {
-      user_id: req.body.user_id,
-      drink_id: req.body.drink_id
-    }}).then(function () {
+    db.Favorites.destroy({
+      where: {
+        user_id: req.body.user_id,
+        drink_id: req.body.drink_id
+      }
+    }).then(function () {
       res.status(200).end();
     })
       .catch(function (err) {
