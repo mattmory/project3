@@ -6,7 +6,7 @@
 
 Our app was created to help users create fantastic drinks using only the ingredients they have available.
 
-The typeahead software predicts what the user is going to input, and shows potential recipes based on the ingredients provided.
+The typeahead assists users in sorting through a large ingredient list while preventing common spelling mistakes and finding related items (ie: Vodka, Lemon Vodka).
 
 ## Mission
 
@@ -23,28 +23,26 @@ The typeahead software predicts what the user is going to input, and shows poten
   - Added Passport.js for authentication and user login.
   - Used a new UI/UX design to redo the front-end
   - Designed with web first strategy which works seamlessly with mobile.
+  - Allow user to browse all drink recipies from one page utilizing infinity scroll for rapid page load.
 
 ## Technologies 
 
-Cocktail Creator relies on many different technologies to function. While we are using another companies API to provide the drink recipes and images, everything else was coded from scratch. 
+Cocktail Creator relies on many different technologies to function.
 
-* Javascript - main functional language
-* React - javascript framework used to build new design
-* Visual Studio Code - text editor
+* [Javascript] - main functional language
+* [React] - javascript framework used to build new design
 * [Twitter Bootstrap] - great UI boilerplate for modern web apps
 * [node.js] - evented I/O for the backend
 * [Express] - fast node.js network app framework 
-* [jQuery] - duh
 * [Passport.js] - user authentication and login
+* [React Virtualized Select] - Typeahead
 
-   [Visual Studio]: <https://visualstudio.microsoft.com>
-   [Ace Editor]: <http://ace.ajax.org>
    [node.js]: <http://nodejs.org>
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
    [express]: <http://expressjs.com>
    [React]: <http://reactjs.org>
    [ESLint]: <http://eslint.com>
+   [React Virtualized Select]: <https://www.npmjs.com/package/react-virtualized-select>
 
 ### Desktop
    ![IMG](client/src/assets/images/live_demo.png)
