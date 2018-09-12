@@ -6,7 +6,7 @@
 
 Our app was created to help users create fantastic drinks using only the ingredients they have available.
 
-The typeahead software predicts what the user is going to input, and shows potential recipes based on the ingredients provided.
+The typeahead auto-complete software shows potential recipes based on the ingredients provided.
 
 ## Mission
 
