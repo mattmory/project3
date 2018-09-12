@@ -32,7 +32,6 @@ class RecipesIS extends React.Component {
       // Test to see if user is at the bottom.
       if (
         (window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-        console.log("At Bottom");
         this.loadMoreRecipes();
       }
     };
