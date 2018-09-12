@@ -50,10 +50,15 @@ class Results extends React.Component {
             }
           });
           // Sort Drink Arrays
-          // canMake -> Alpha
-          // almostMake -> missingIngCount
-          canMake.sort(function (a, b) { return a.name.localeCompare(b.name)});
-          almostMake.sort(function (a, b) {return a.missingIngCount - b.missingIngCount || a.name.localeCompare(b.name);});
+          // canMake -> Alpha by Name
+          // almostMake -> missingIngCount then Alpha Name
+          canMake.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+          });
+          almostMake.sort(function (a, b) {
+            return a.missingIngCount -
+              b.missingIngCount || a.name.localeCompare(b.name);
+          });
           this.setState({ ingredients: selectValue, canMake: canMake, almostMake: almostMake });
         } else {
           console.log("no results found");
@@ -70,7 +75,7 @@ class Results extends React.Component {
           </div>
         </div>
         <ResultsTab {...this.props} canMake={this.state.canMake} almostMake={this.state.almostMake}
-          userId={this.props.userId} isAuthenticated={this.props.isAuthenticated}/>
+          userId={this.props.userId} isAuthenticated={this.props.isAuthenticated} />
       </div>
     );
   }

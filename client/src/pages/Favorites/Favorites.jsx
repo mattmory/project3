@@ -62,7 +62,7 @@ class Favorites extends React.Component {
           </div>
         ) : (
           <div>
-            <span>You have no favorites but here are our most favorited drinks for you to try.</span>
+            <div className="nofavoritesdiv">You have no favorites but here are our most favorited drinks ordered by popularity for you to try.</div>
             <div className="row">
               {this.state.topFaves.map(Fav => (
                 <Card key={Fav.drink_id}

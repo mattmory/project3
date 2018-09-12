@@ -57,6 +57,16 @@ class Welcome extends React.Component {
         } else {
           console.log("no results found");
         }
+        // Sort Drink Arrays
+        // canMake -> Alpha by Name
+        // almostMake -> missingIngCount then Alpha Name
+        canMake.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        });
+        almostMake.sort(function (a, b) {
+          return a.missingIngCount -
+            b.missingIngCount || a.name.localeCompare(b.name);
+        });
         this.props.searchCB(ingArray, canMake, almostMake);
         this.setState({ toResults: true, canMake: canMake, almostMake: almostMake });
       });
@@ -72,7 +82,7 @@ class Welcome extends React.Component {
           <h1>Welcome! Let's get started.</h1>
           <h3>Find recipes by letting us know which ingredients you have on hand.</h3>
           <div className="welcome-typeahead">
-            <Typeahead ingredientCB={this.ingredientCB}/>
+            <Typeahead ingredientCB={this.ingredientCB} />
           </div>
           <button type="button" className="button float-right" onClick={this.handleSearch}>
             Search Recipes
