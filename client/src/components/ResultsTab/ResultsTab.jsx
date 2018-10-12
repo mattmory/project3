@@ -1,5 +1,9 @@
 import React from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+// Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/";
+
 
 import "./ResultsTab.css";
 import API from "../../utils/API";
@@ -13,17 +17,11 @@ class ResultsTab extends React.Component {
     let startState = (this.props.canMake.length > 0);
     this.state = {
       ready: startState,
-      userFaves: [],
       modal: !startState
     };
     this.toggleReady = this.toggleReady.bind(this);
     this.getCanMake = this.getCanMake.bind(this);
     this.getAlmostMake = this.getAlmostMake.bind(this);
-    this.loadUserFavorites = this.loadUserFavorites.bind(this);
-  }
-
-  componentDidMount() {
-    this.loadUserFavorites();
   }
 
   toggleReady(event) {
@@ -36,10 +34,7 @@ class ResultsTab extends React.Component {
     return this.props.canMake.map(drink => {
       return (<Card key={drink.id}
         drinkId={drink.id}
-        userId={this.props.userId}
-        isAuthenticated={this.props.isAuthenticated}
-        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
-        updateFaves={() => this.loadUserFavorites()}
+        fromFaves={this.props.faves.map(fav => fav.drink_id).includes(drink.id)}
       />);
     });
   }
@@ -48,23 +43,12 @@ class ResultsTab extends React.Component {
     return this.props.almostMake.map(drink => (
       <CardMissing key={drink.id}
         drinkId={drink.id}
-        userId={this.props.userId}
-        isAuthenticated={this.props.isAuthenticated}
-        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
-        updateFaves={() => this.loadUserFavorites()}
+        fromFaves={this.props.faves.map(fav => fav.drink_id).includes(drink.id)}
         missingIng={drink.missingIng}
       />
     ));
   }
 
-  loadUserFavorites = () => {
-    if (this.props.isAuthenticated) {
-      API.getUsersFavorites(this.props.userId)
-        .then(res => {
-          this.setState({ userFaves: res.data });
-        }).catch(err => console.log(err));
-    }
-  };
 
   closeModal = () => {
     this.setState({
@@ -104,4 +88,12 @@ class ResultsTab extends React.Component {
   }
 }
 
-export default ResultsTab;
+
+
+const mapStateToProps = (state) => {
+  return {
+    faves: state.favs.faves
+  };
+};
+
+export default connect(mapStateToProps, null)(ResultsTab);

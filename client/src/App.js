@@ -6,7 +6,7 @@ import Account from "./pages/Account";
 import Favorites from "./pages/Favorites";
 import Results from "./pages/Results";
 import Navigation from "./components/Nav";
-import Recipes from "./pages/Recipes";
+//import Recipes from "./pages/Recipes";
 import RecipesIS from "./pages/RecipesIS";
 
 class App extends Component {

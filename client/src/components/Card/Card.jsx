@@ -1,4 +1,9 @@
 import React from "react";
+// Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/";
+
+
 import "./Card.css";
 import API from "../../utils/API";
 import DrinkIcon from "../DrinkIcon";
@@ -26,18 +31,18 @@ class Card extends React.Component {
 
   updateFavorite = () => {
     // Check to see if the user is authed.. if no, do nothing.
-    if (this.props.isAuthenticated) {
+    if (this.props.isAuth) {
       // Check to see if the action was from the favorite page, if so, delete the fav.
       if (this.props.fromFaves) {
         API.deleteFavorite(this.props.userId, this.state.drinkData.drinkID)
           .then(() => {
-            this.props.updateFaves();
+            this.props.removeFavorite(this.props.userId, this.state.drinkData.drinkID);
           });
       } else {
         // If the action no from favorites, add a favorite
         API.addFavorite(this.props.userId, this.state.drinkData.drinkID)
           .then(() => {
-            this.props.updateFaves();
+            this.props.addFavorite(this.props.userId, this.state.drinkData.drinkID);
           });
       }
     }
@@ -71,4 +76,22 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuth,
+    userId: state.auth.userId,
+    faves: state.favs.faves
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFavorite: (userId,drinkId) => { dispatch(actionCreators.addFavorite({userId: userId,drinkId: drinkId})) },
+    removeFavorite: (userId,drinkId) => { dispatch(actionCreators.removeFavorite({userId: userId,drinkId: drinkId}))}
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

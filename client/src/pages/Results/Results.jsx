@@ -1,4 +1,9 @@
 import React from "react";
+// Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/";
+
+
 import "./Results.css";
 import API from "../../utils/API";
 import Typeahead from "../../components/Typeahead";
@@ -75,10 +80,19 @@ class Results extends React.Component {
           </div>
         </div>
         <ResultsTab {...this.props} canMake={this.state.canMake} almostMake={this.state.almostMake}
-          userId={this.props.userId} isAuthenticated={this.props.isAuthenticated} />
+          userId={this.props.userId} isAuthenticated={this.props.isAuth} />
       </div>
     );
   }
 }
 
-export default Results;
+
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuth,
+    userId: state.auth.userId
+  };
+};
+
+export default connect(mapStateToProps, null)(Results);

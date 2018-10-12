@@ -9,6 +9,12 @@ import {
   NavItem,
   DropdownItem
 } from 'reactstrap';
+
+// Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/";
+
+
 import "./Nav.css";
 import DrinkIcon from "../DrinkIcon/DrinkIcon";
 
@@ -29,7 +35,7 @@ class Navigation extends Component {
   }
 
   getLink() {
-    if (this.props.isAuthenticated) {
+    if (this.props.isAuth) {
       return <Link to="/favorites" className="nav-link">
         <span className="favorites">
           <span className="drink-icon-nav mr-1">
@@ -75,4 +81,12 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuth,
+    userId: state.auth.userId,
+  };
+};
+
+export default connect(mapStateToProps, null)(Navigation);

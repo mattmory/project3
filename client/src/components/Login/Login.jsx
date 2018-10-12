@@ -1,6 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+// Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/";
 
 
 
@@ -62,8 +65,14 @@ class Login extends React.Component {
     API.userLogin(this.state.email, this.state.password)
       // Redirect to landing page on successful login
       .then((res) => {
-        this.props.authCB(this.state.email, res.data.isAuthenticated, res.data.id);
-        this.setState({ toHome: true });
+        // Set the Store Info for Login
+        this.props.onSuccessfullLogin(this.state.email, res.data.id);
+        API.getUsersFavorites(res.data.id).then((res) => {
+          if(res.data.length > 0){
+            this.props.getAllFavorites(res.data);
+          }
+          this.setState({ toHome: true });
+        });
       })
       .catch((err) => {
         this.setState({ modal: true, modalMsg: "Please review your email and password." });
@@ -129,7 +138,7 @@ class Login extends React.Component {
             <span className="modalText">{this.state.modalMsg}</span>
           </ModalBody>
           <ModalFooter>
-            <button onClick={this.closeModal} class="button float-right">Ok</button>
+            <button onClick={this.closeModal} className="button float-right">Ok</button>
           </ModalFooter>
         </Modal>
       </div>
@@ -138,4 +147,18 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.isAuth,
+    faves: state.faves
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSuccessfullLogin: (email,id) => { dispatch(actionCreators.onSuccessfullLogin({email: email,id: id})) },
+    getAllFavorites: (favArray) => { dispatch(actionCreators.getAllFavorites(favArray))}
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

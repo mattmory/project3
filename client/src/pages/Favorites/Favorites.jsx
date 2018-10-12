@@ -1,62 +1,44 @@
 import React from "react";
-import "./Favorites.css";
-
 import { Redirect } from "react-router-dom";
-import API from "../../utils/API";
+// Redux
+import { connect } from "react-redux";
 
+import API from "../../utils/API";
+import "./Favorites.css";
 import Card from "../../components/Card/";
 
 class Favorites extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      userId: props.userId,
-      isAuthenticated: props.isAuthenticated,
-      userFaves: [],
-      topFaves: []
-    };
-  }
+  state = {
+    topFaves: []
+  };
 
   componentDidMount() {
-    this.loadUserFavorites();
+    this.loadTopFavorites();
   }
-
-  loadUserFavorites = () => {
-    API.getUsersFavorites(this.state.userId)
-      .then(res => {
-        if (res.data.length > 0) {
-          this.setState({ userFaves: res.data });
-        } else {
-          this.loadTopFavorites();
-        }
-      })
-      .catch(err => console.log(err));
-  };
 
   loadTopFavorites = () => {
     API.getAllFavorites()
       .then(res => {
-        this.setState({ userFaves: [], topFaves: res.data });
+        this.setState({ topFaves: [], topFaves: res.data });
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    if (!this.state.isAuthenticated) {
+    // if(!this.props.faves.length) {
+    //   this.loadTopFavorites();
+    // }
+    if (!this.props.isAuth) {
       return <Redirect to="/" />;
     }
     return (
       <div className="favorites-container container">
-        {this.state.userFaves.length ? (
+        {this.props.faves.length ? (
           <div className="row">
-            {this.state.userFaves.map(Fav => (
+            {this.props.faves.map(Fav => (
               <Card key={Fav.drink_id}
                 drinkId={Fav.drink_id}
-                userId={this.state.userId}
-                isAuthenticated={this.state.isAuthenticated}
                 fromFaves={true}
-                updateFaves={() => this.loadUserFavorites()}
               />
             ))}
           </div>
@@ -67,10 +49,7 @@ class Favorites extends React.Component {
               {this.state.topFaves.map(Fav => (
                 <Card key={Fav.drink_id}
                   drinkId={Fav.drink_id}
-                  userId={this.state.userId}
-                  isAuthenticated={this.state.isAuthenticated}
                   fromFaves={false}
-                  updateFaves={() => this.loadUserFavorites()}
                 />
               ))}
             </div>
@@ -78,6 +57,18 @@ class Favorites extends React.Component {
       </div>
     );
   }
+
+
 }
 
-export default Favorites;
+
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuth,
+    userId: state.auth.userId,
+    faves: state.favs.faves
+  };
+};
+
+export default connect(mapStateToProps, null)(Favorites);

@@ -1,4 +1,10 @@
 import React from "react";
+// Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/";
+
+
+
 import API from "../../utils/API";
 import "./RecipesIS.css";
 import Card from "../../components/Card";
@@ -11,8 +17,7 @@ class RecipesIS extends React.Component {
       recipeIds: [],
       isLoading: true,
       hasMore: true,
-      loadError: false,
-      userFaves: [],
+      loadError: false
     };
     this.getRecipes = this.getRecipes.bind(this);
     this.loadMoreRecipes = this.loadMoreRecipes.bind(this);
@@ -20,8 +25,6 @@ class RecipesIS extends React.Component {
     window.onscroll = () => {
       const {
         state: {
-          loadError,
-          isLoading,
           hasMore,
         },
       } = this;
@@ -39,7 +42,6 @@ class RecipesIS extends React.Component {
 
   componentDidMount() {
     this.getRecipes();
-    this.loadUserFavorites();
   }
 
   getRecipes() {
@@ -80,23 +82,11 @@ class RecipesIS extends React.Component {
     });
   };
 
-  loadUserFavorites = () => {
-    if (this.props.isAuthenticated) {
-      API.getUsersFavorites(this.props.userId)
-        .then(res => {
-          this.setState({ userFaves: res.data });
-        }).catch(err => console.log(err));
-    }
-  };
-
   getCards() {
     return this.state.recipeIds.map(drink => (
       <Card key={drink.id}
         drinkId={drink.id}
-        userId={this.props.userId}
-        isAuthenticated={this.props.isAuthenticated}
-        fromFaves={this.state.userFaves.map(fav => fav.drink_id).includes(drink.id)}
-        updateFaves={() => this.loadUserFavorites()}
+        fromFaves={this.props.faves.map(fav => fav.drink_id).includes(drink.id)}
       />
     ));
   }
@@ -112,4 +102,12 @@ class RecipesIS extends React.Component {
   }
 }
 
-export default RecipesIS;
+
+const mapStateToProps = (state) => {
+  return {
+    faves: state.favs.faves
+  };
+};
+
+
+export default connect(mapStateToProps, null)(RecipesIS);
